@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '../store/index'
-import { Loading } from 'element-ui'
+import router from '../router/index'
+import { Loading, Message } from 'element-ui'
 
 // import qs from 'qs'
 axios.defaults.timeout = 0
@@ -21,7 +22,11 @@ axios.interceptors.request.use(
       lock: true,
       text: '拼命加载中...'
     })
-    let token = store.state.userMsg.token
+    let token =
+      store.state.userMsg.token ||
+      JSON.parse(window.localStorage.getItem('userMsg'))
+        ? JSON.parse(window.localStorage.getItem('userMsg')).token
+        : '' || ''
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
@@ -48,6 +53,21 @@ axios.interceptors.response.use(
   error => {
     const loading = Loading.service({})
     loading.close()
+    if (error.response) {
+      if (error.response.status === 401) {
+        // 这种情况一般调到登录页
+        window.localStorage.clear()
+        store.commit('clearUserMsg')
+        router.replace({
+          path: '/'
+        })
+        Message({
+          message: 'token已失效，请重新登录',
+          type: 'error',
+          showClose: true
+        })
+      }
+    }
     return Promise.resolve(error)
   }
 )

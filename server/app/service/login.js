@@ -14,7 +14,6 @@ class LoginService extends Service {
       return { state: false, msg: '用户名或密码错误' }
     }
     // 生成Token令牌
-    console.log(user.nickname, user._id)
     return {
       state: true,
       userMsg: {

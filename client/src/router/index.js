@@ -1,12 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/view/Login/index'
+import NoPage from '@/view/404/404'
 import store from '../store/index'
 import { Message } from 'element-ui'
 
 Vue.use(Router)
 export default new Router({
   routes: [
+    {
+      path: '*',
+      name: 'NoPage',
+      component: NoPage
+    },
     {
       path: '/',
       name: 'Login',
@@ -16,7 +22,12 @@ export default new Router({
       path: '/home',
       name: 'home',
       beforeEnter: (to, from, next) => {
-        if (store.state.userMsg && store.state.userMsg.token) {
+        let token =
+          store.state.userMsg.token ||
+          JSON.parse(window.localStorage.getItem('userMsg'))
+            ? JSON.parse(window.localStorage.getItem('userMsg')).token
+            : ''
+        if (token) {
           next()
         } else {
           next('/')

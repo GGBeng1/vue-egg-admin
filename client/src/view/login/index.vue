@@ -63,10 +63,9 @@ export default {
       this.$refs.form.validate(async valid => {
         if (valid) {
           let res = await login(this.form);
-          // console.log(res);
           let { state, userMsg } = res.data.data;
-          console.log(res);
           if (state) {
+            window.localStorage.setItem("userMsg", JSON.stringify(userMsg));
             this.$store.commit("setUserMsg", userMsg);
             this.$router.push("/home");
           }
