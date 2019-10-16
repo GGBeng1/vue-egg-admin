@@ -10,7 +10,7 @@ class TokenService extends Service {
         data: {
           _id: _id
         },
-        exp: Math.floor(Date.now() / 1000 + 5)
+        exp: Math.floor(Date.now() / 1000 + 60 * 60 * 12)
       },
       ctx.app.config.jwt.secret
     )

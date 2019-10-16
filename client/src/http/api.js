@@ -5,7 +5,7 @@ export const login = params => {
   return axios.post(resfulParamsToUrl('/login', params), params)
 }
 export const getHomeList = params => {
-  return axios.post(resfulParamsToUrl('/home', params), params)
+  return axios.post(resfulParamsToUrl('/api/home', params), params)
 }
 // export const queryUser = params => {
 //   return axios.get(resfulParamsToUrl(Path.userUrl1, params), {
