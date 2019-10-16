@@ -48,6 +48,7 @@ module.exports = appInfo => {
     // url: 'mongodb://127.0.0.1:27017/123',
     options: {
       // useMongoClient: true,
+      useFindAndModify: false,
       autoReconnect: true,
       reconnectTries: Number.MAX_VALUE,
       bufferMaxEntries: 0,

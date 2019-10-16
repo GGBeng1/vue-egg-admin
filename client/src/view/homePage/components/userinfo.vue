@@ -32,7 +32,8 @@
               v-show="process == true"
               type="circle"
               :percentage="percent"
-              style="margin-top: 20px"
+              style="margin-top: 5px"
+              :width="90"
             >
             </el-progress>
           </el-upload>
@@ -100,6 +101,9 @@ export default {
       if (res && res.response.code == 200) {
         this.$store.commit("setUserAvatarUrl", res.response.data.avatarUrl);
       }
+      setTimeout(() => {
+        this.process = false;
+      }, 500);
     },
     beforeAvatarUpload(file) {
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -149,7 +153,8 @@ export default {
     line-height: 100px;
     text-align: center;
   }
-}
-.userInfo {
+  .el-upload {
+    height: 100px;
+  }
 }
 </style>

@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       //是否显示用户信息
-      open: true
+      open: false
     };
   },
   methods: {
