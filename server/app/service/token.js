@@ -15,6 +15,16 @@ class TokenService extends Service {
       ctx.app.config.jwt.secret
     )
   }
+  async getUserByToken() {
+    const { ctx, service } = this
+    // ctx.state.user 可以提取到JWT编码的data
+    const _id = ctx.state.user.data._id
+    const user = await service.user.findByUserId(_id)
+    if (!user) {
+      ctx.throw(404, 'user is not found')
+    }
+    return user
+  }
 }
 
 module.exports = TokenService

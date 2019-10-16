@@ -1,10 +1,11 @@
 <template>
   <div>
-    <homeHeader></homeHeader>
+    <homeHeader :open.sync="open"></homeHeader>
     <div>
       <homeMain></homeMain>
       <homeSide></homeSide>
     </div>
+    <userInfo :open.sync="open"></userInfo>
   </div>
 </template>
 
@@ -12,15 +13,20 @@
 import homeHeader from "./components/header";
 import homeMain from "./components/main";
 import homeSide from "./components/side";
+import userInfo from "./components/userinfo";
 import { getHomeList } from "@/http/api.js";
 export default {
   components: {
     homeHeader,
     homeMain,
-    homeSide
+    homeSide,
+    userInfo
   },
   data() {
-    return {};
+    return {
+      //是否显示用户信息
+      open: true
+    };
   },
   methods: {
     async init() {

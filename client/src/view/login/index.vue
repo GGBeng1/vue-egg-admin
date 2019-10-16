@@ -13,7 +13,7 @@
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input v-model="form.password" clearable>
+            <el-input v-model="form.password" clearable show-password>
               <i slot="prepend" class="el-icon-lock"></i>
             </el-input>
           </el-form-item>

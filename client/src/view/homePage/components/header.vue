@@ -5,17 +5,18 @@
     </div>
     <div class="userInfo">
       <div style="margin-right:20px">
-        <el-avatar
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          :size="35"
-        ></el-avatar>
+        <el-avatar :src="baseUrl + userMsg.avatarUrl" :size="35"></el-avatar>
       </div>
       <div>
         <el-dropdown trigger="click" size="small">
           <span style="color: #fff;cursor: pointer;">
-            {{ nickname }}<i class="el-icon-arrow-down el-icon--right"></i>
+            {{ userMsg.nickname
+            }}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="handlerRejectUserInfo"
+              >个人信息</el-dropdown-item
+            >
             <el-dropdown-item @click.native="handlerLoginOut"
               >退出登录</el-dropdown-item
             >
@@ -28,14 +29,22 @@
 
 <script>
 import { mapState } from "vuex";
-
+import axios from "@/http/axios";
 export default {
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
-    return {};
+    return {
+      baseUrl: axios.defaults.baseURL
+    };
   },
   computed: {
     ...mapState({
-      nickname: state => state.userMsg.nickname
+      userMsg: state => state.userMsg
     })
   },
   methods: {
@@ -45,6 +54,9 @@ export default {
       this.$router.replace({
         path: "/"
       });
+    },
+    handlerRejectUserInfo() {
+      this.$emit("update:open", true);
     }
   }
 };

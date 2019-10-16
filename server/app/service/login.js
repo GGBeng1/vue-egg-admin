@@ -19,6 +19,7 @@ class LoginService extends Service {
       userMsg: {
         roletype: user.roletype,
         nickname: user.nickname,
+        avatarUrl: user.avatarUrl,
         token: await service.token.apply(user._id)
       }
     }

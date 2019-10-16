@@ -5,6 +5,7 @@ module.exports = app => {
     username: { type: String, required: true, unique: true },
     roletype: { type: String, required: true },
     nickname: { type: String, required: true },
+    avatarUrl: { type: String },
     extra: { type: mongoose.Schema.Types.Mixed },
     createdAt: { type: Date, default: Date.now }
   })
