@@ -50,7 +50,9 @@ module.exports = appInfo => {
       // useMongoClient: true,
       autoReconnect: true,
       reconnectTries: Number.MAX_VALUE,
-      bufferMaxEntries: 0
+      bufferMaxEntries: 0,
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     }
   }
   config.jwt = {
