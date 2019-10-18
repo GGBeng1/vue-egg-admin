@@ -66,6 +66,15 @@ axios.interceptors.response.use(
           type: 'error',
           showClose: true
         })
+      } else if (
+        error.response.status === 404 ||
+        error.response.status === 500
+      ) {
+        Message({
+          message: '请求失败',
+          type: 'error',
+          showClose: true
+        })
       }
     }
     return Promise.resolve(error)

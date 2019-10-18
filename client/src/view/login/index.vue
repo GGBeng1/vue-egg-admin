@@ -63,17 +63,29 @@ export default {
       this.$refs.form.validate(async valid => {
         if (valid) {
           let res = await login(this.form);
-          let { state, userMsg } = res.data.data;
+          let { state, userMsg, msg } = res.data.data;
           if (state) {
             window.localStorage.setItem("userMsg", JSON.stringify(userMsg));
             this.$store.commit("setUserMsg", userMsg);
             this.$router.push("/home");
+          } else {
+            this.$message({
+              message: msg,
+              type: "warning",
+              showClose: true
+            });
           }
         } else {
           // console.log('error submit!!');
           return false;
         }
       });
+    }
+  },
+  mounted() {
+    let token = this.$store.state.userMsg.token;
+    if (token) {
+      this.$router.push("/home");
     }
   }
 };
