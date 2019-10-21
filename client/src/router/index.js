@@ -7,6 +7,7 @@ import { Message } from 'element-ui'
 
 Vue.use(Router)
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '*',
@@ -22,11 +23,7 @@ export default new Router({
       path: '/home',
       name: 'home',
       beforeEnter: (to, from, next) => {
-        let token =
-          store.state.userMsg.token ||
-          JSON.parse(window.localStorage.getItem('userMsg'))
-            ? JSON.parse(window.localStorage.getItem('userMsg')).token
-            : ''
+        let token = store.state.userMsg.token || JSON.parse(window.localStorage.getItem('userMsg')) ? JSON.parse(window.localStorage.getItem('userMsg')).token : ''
         if (token) {
           next()
         } else {
@@ -38,8 +35,19 @@ export default new Router({
           })
         }
       },
-      component: () =>
-        import(/* webpackChunkName: "home" */ '@/view/homePage/index')
+      component: () => import(/* webpackChunkName: "home" */ '@/view/homePage/index'),
+      children: [
+        {
+          path: 'tableExprot',
+          name: 'tableExprot',
+          component: () => import(/* webpackChunkName: "tableExprot" */ '@/view/table/tableExport')
+        },
+        {
+          path: 'tableUpload',
+          name: 'tableUpload',
+          component: () => import(/* webpackChunkName: "tableUpload" */ '@/view/table/tableUpload')
+        }
+      ]
     }
   ]
 })

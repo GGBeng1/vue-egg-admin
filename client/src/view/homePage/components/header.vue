@@ -2,6 +2,14 @@
   <div class="header">
     <div class="logo">
       GGBeng
+      <i
+        class="el-icon-s-fold"
+        style="color:#ffd04b;margin-left:20px;cursor:pointer;"
+      ></i>
+      <i
+        class="el-icon-s-unfold"
+        style="color:#fff;margin-left:20px;cursor:pointer;"
+      ></i>
     </div>
     <div class="userInfo">
       <div style="margin-right:20px">
@@ -69,9 +77,15 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 10px;
   .logo {
     color: #fff;
-    font-size: 30px;
+    font-size: 20px;
+    height: 50px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
   .userInfo {
     display: flex;

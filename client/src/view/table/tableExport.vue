@@ -1,13 +1,11 @@
 <template>
   <div>
-    <route-view></route-view>
+    tableExport
   </div>
 </template>
 
 <script>
-export default {
-  name: "mainView"
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

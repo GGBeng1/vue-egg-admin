@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="home">
     <homeHeader :open.sync="open"></homeHeader>
-    <div>
-      <homeMain></homeMain>
-      <homeSide></homeSide>
+    <div class="layout">
+      <homeSide class="homeSide"></homeSide>
+      <homeMain class="homeMain"></homeMain>
     </div>
     <userInfo :open.sync="open"></userInfo>
   </div>
@@ -41,4 +41,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home {
+  .layout {
+    display: flex;
+    .homeSide {
+      width: 200px;
+    }
+    .homeMain {
+      flex: 1;
+    }
+  }
+}
 </style>
