@@ -11,7 +11,7 @@
       router
     >
       <el-submenu
-        :index="index + 'cc'"
+        index="/home"
         v-for="(item, index) in menuList"
         :key="index + 'zz'"
       >
