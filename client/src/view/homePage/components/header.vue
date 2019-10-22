@@ -5,10 +5,14 @@
       <i
         class="el-icon-s-fold"
         style="color:#ffd04b;margin-left:20px;cursor:pointer;"
+        v-if="!isCollapse"
+        @click="changeIsCollapse"
       ></i>
       <i
         class="el-icon-s-unfold"
         style="color:#fff;margin-left:20px;cursor:pointer;"
+        v-if="isCollapse"
+        @click="changeIsCollapse"
       ></i>
     </div>
     <div class="userInfo">
@@ -36,7 +40,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import axios from "@/http/axios";
 export default {
   props: {
@@ -52,10 +56,12 @@ export default {
   },
   computed: {
     ...mapState({
-      userMsg: state => state.userMsg
+      userMsg: state => state.userMsg,
+      isCollapse: state => state.isCollapse
     })
   },
   methods: {
+    ...mapMutations(["changeIsCollapse"]),
     handlerLoginOut() {
       window.localStorage.clear();
       this.$store.commit("clearUserMsg");

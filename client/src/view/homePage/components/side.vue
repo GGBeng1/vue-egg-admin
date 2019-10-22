@@ -1,17 +1,18 @@
 <template>
   <div class="side">
     <el-menu
-      default-active="1"
       class="side-nav"
       :collapse="isCollapse"
+      :default-active="defaultActive"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
       unique-opened
       router
+      @select="handlerSelect"
     >
       <el-submenu
-        index="/home"
+        :index="index + ''"
         v-for="(item, index) in menuList"
         :key="index + 'zz'"
       >
@@ -20,7 +21,7 @@
           <span slot="title">{{ item.name }}</span>
         </template>
         <el-menu-item
-          :index="item.path"
+          :index="ele.path"
           v-for="(ele, i) in item.children"
           :key="index + '-' + i"
           >{{ ele.name }}</el-menu-item
@@ -31,10 +32,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      isCollapse: false,
+      defaultActive: "",
       menuList: [
         {
           name: "Excel",
@@ -52,12 +54,34 @@ export default {
         }
       ]
     };
-  }
+  },
+  computed: {
+    ...mapState({
+      isCollapse: state => state.isCollapse
+    })
+  },
+  methods: {
+    handlerSelect(indexPath) {
+      window.localStorage.setItem("defaultActive", indexPath);
+    }
+  },
+  created() {
+    let res = window.localStorage.getItem("defaultActive");
+    if (res) {
+      this.defaultActive = res;
+      this.$router.push(res);
+    }
+  },
+  watch: {}
 };
 </script>
 
 <style lang="scss" scoped>
 .side {
+  height: 100%;
+  .side-nav {
+    height: 100%;
+  }
   .side-nav:not(.el-menu--collapse) {
     width: 200px;
   }

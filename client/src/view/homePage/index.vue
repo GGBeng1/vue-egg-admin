@@ -42,11 +42,10 @@ export default {
 
 <style lang="scss" scoped>
 .home {
+  height: 100%;
   .layout {
+    height: calc(100% - 50px);
     display: flex;
-    .homeSide {
-      width: 200px;
-    }
     .homeMain {
       flex: 1;
     }

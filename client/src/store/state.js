@@ -1,3 +1,4 @@
 export default {
-  userMsg: {}
+  userMsg: {},
+  isCollapse: false
 }

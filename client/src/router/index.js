@@ -6,6 +6,10 @@ import store from '../store/index'
 import { Message } from 'element-ui'
 
 Vue.use(Router)
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 export default new Router({
   mode: 'history',
   routes: [
@@ -38,9 +42,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "home" */ '@/view/homePage/index'),
       children: [
         {
-          path: 'tableExprot',
-          name: 'tableExprot',
-          component: () => import(/* webpackChunkName: "tableExprot" */ '@/view/table/tableExport')
+          path: 'tableExport',
+          name: 'tableExport',
+          component: () => import(/* webpackChunkName: "tableExport" */ '@/view/table/tableExport')
         },
         {
           path: 'tableUpload',

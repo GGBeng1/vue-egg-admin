@@ -7,7 +7,10 @@ export default {
     state.userMsg.avatarUrl = url
     window.localStorage.setItem('userMsg', JSON.stringify(state.userMsg))
   },
-  clearUserMsg(state, info) {
+  clearUserMsg(state) {
     state.userMsg = {}
+  },
+  changeIsCollapse(state) {
+    state.isCollapse = !state.isCollapse
   }
 }

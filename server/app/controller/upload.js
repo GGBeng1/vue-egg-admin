@@ -14,12 +14,14 @@ class UploadController extends Controller {
     const uuid = (Math.random() * 999999).toFixed()
 
     // 组装参数 stream
-    const target = path.join(
-      this.config.baseDir,
-      'app/public/uploads',
-      `${uuid}${extname}`
-    )
+    const target = path.join(this.config.baseDir, 'app/public/uploads', `${uuid}${extname}`)
     const writeStream = fs.createWriteStream(target)
+    let user = await service.user.findByUserId(id)
+    if (user.avatarUrl && !user.avatarUrl.includes('77058')) {
+      await fs.unlinkSync(`app${user.avatarUrl}`, function(err) {
+        if (err) throw err
+      })
+    }
     // 文件处理，上传到云存储等等
     try {
       await awaitWriteStream(stream.pipe(writeStream))
@@ -31,9 +33,9 @@ class UploadController extends Controller {
       await sendToWormhole(stream)
       throw err
     }
-    let user = await service.user.findByUserId(id)
+
     let res = {
-      avatarUrl: user.avatarUrl
+      avatarUrl: `/public/uploads/${uuid}${extname}`
     }
     ctx.helper.success({ ctx, res })
   }
