@@ -68,12 +68,13 @@ export default {
   methods: {
     beforeClose() {
       this.$emit("update:open", false);
+      this.handlerResetForm();
     },
     handlerSubmit() {
       this.$refs.form.validate(valid => {
         if (valid) {
           this.$emit("addMsg", this.form);
-          this.beforeClose();
+          this.$emit("update:open", false);
         }
       });
     },
