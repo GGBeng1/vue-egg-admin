@@ -6,7 +6,7 @@
 module.exports = app => {
   const { router, controller } = app
   router.post('/login', controller.login.index)
-  router.post('/api/home', controller.home.index)
+  router.get('/home', controller.home.index)
   router.post('/api/upload', controller.upload.uploadAvatar)
   router.post('/createUser', controller.user.createUser)
   router.post('/api/tableExport', controller.upload.tableExport)
