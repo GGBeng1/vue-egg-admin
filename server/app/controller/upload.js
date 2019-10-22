@@ -5,6 +5,7 @@ const awaitWriteStream = require('await-stream-ready').write
 const sendToWormhole = require('stream-wormhole')
 const fs = require('fs')
 const path = require('path')
+const Excel = require('exceljs')
 class UploadController extends Controller {
   async uploadAvatar() {
     const { ctx, service } = this
@@ -14,7 +15,11 @@ class UploadController extends Controller {
     const uuid = (Math.random() * 999999).toFixed()
 
     // 组装参数 stream
-    const target = path.join(this.config.baseDir, 'app/public/uploads', `${uuid}${extname}`)
+    const target = path.join(
+      this.config.baseDir,
+      'app/public/uploads',
+      `${uuid}${extname}`
+    )
     const writeStream = fs.createWriteStream(target)
     let user = await service.user.findByUserId(id)
     if (user.avatarUrl && !user.avatarUrl.includes('77058')) {
@@ -38,6 +43,28 @@ class UploadController extends Controller {
       avatarUrl: `/public/uploads/${uuid}${extname}`
     }
     ctx.helper.success({ ctx, res })
+  }
+  //文件导出
+  async tableExport() {
+    const { ctx } = this
+    const uuid = (Math.random() * 999999).toFixed()
+    //初始画excel
+    const workbook = new Excel.Workbook()
+    let sheet = workbook.addWorksheet()
+
+    sheet.columns = [
+      { header: '名称', key: 'name', width: 15 },
+      { header: '电话号码', key: 'date', width: 15 },
+      { header: '地址', key: 'address', width: 100 }
+    ]
+    const data = ctx.request.body || {}
+    sheet.addRows(data.selectOption)
+    this.ctx.set('Content-Disposition', `attachment;filename=${uuid}.xlsx`)
+    this.ctx.set('content-Type', 'application/ms-excel')
+    this.ctx.set('Access-Control-Expose-Headers', 'Content-Disposition')
+    ctx.status = 200
+    await workbook.xlsx.write(ctx.res)
+    ctx.res.end()
   }
 }
 

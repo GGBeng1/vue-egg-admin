@@ -7,6 +7,11 @@ export const login = params => {
 export const getHomeList = params => {
   return axios.post(resfulParamsToUrl('/api/home', params), params)
 }
+export const tableExport = params => {
+  return axios.post(resfulParamsToUrl('/api/tableExport', params), params, {
+    responseType: 'blob'
+  })
+}
 // export const queryUser = params => {
 //   return axios.get(resfulParamsToUrl(Path.userUrl1, params), {
 //     params
