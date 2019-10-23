@@ -6,9 +6,7 @@ const sendToWormhole = require('stream-wormhole')
 const fs = require('fs')
 const path = require('path')
 const Excel = require('exceljs')
-const XLSX = require('xlsx')
-// const node_xlsx = require('node-xlsx')
-// const XlsxStreamReader = require('xlsx-stream-reader')
+
 class UploadController extends Controller {
   async uploadAvatar() {
     const { ctx, service } = this

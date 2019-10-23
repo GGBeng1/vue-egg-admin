@@ -17,10 +17,8 @@
     "egg-swagger-doc-feat": "^2.2.13",
     "egg-validate": "^2.0.2",
     "exceljs": "^3.2.0",
-    "node-xlsx": "^0.15.0",
     "stream-wormhole": "^1.1.0",
-    "xlsx": "^0.15.1",
-    "xlsx-stream-reader": "^1.1.0"
+    "xlsx": "^0.15.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",
