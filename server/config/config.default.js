@@ -17,7 +17,11 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = []
-
+  config.multipart = {
+    fileSize: '50mb',
+    mode: 'stream',
+    fileExtensions: ['.xls', '.xlsx']
+  }
   // config.swaggerdoc = {
   //   dirScanner: './app/controller',
   //   apiInfo: {

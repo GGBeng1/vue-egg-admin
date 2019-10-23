@@ -6,6 +6,9 @@ const sendToWormhole = require('stream-wormhole')
 const fs = require('fs')
 const path = require('path')
 const Excel = require('exceljs')
+const XLSX = require('xlsx')
+// const node_xlsx = require('node-xlsx')
+// const XlsxStreamReader = require('xlsx-stream-reader')
 class UploadController extends Controller {
   async uploadAvatar() {
     const { ctx, service } = this
@@ -54,7 +57,7 @@ class UploadController extends Controller {
 
     sheet.columns = [
       { header: '名称', key: 'name', width: 15 },
-      { header: '电话号码', key: 'date', width: 15 },
+      { header: '日期', key: 'date', width: 15 },
       { header: '地址', key: 'address', width: 100 }
     ]
     const data = ctx.request.body || {}
@@ -65,6 +68,13 @@ class UploadController extends Controller {
     ctx.status = 200
     await workbook.xlsx.write(ctx.res)
     ctx.res.end()
+  }
+  //excel文件上传
+  async tableUpload() {
+    const { ctx, service } = this
+    const stream = await ctx.getFileStream()
+    let res = await service.upload.uploadExcel(stream)
+    ctx.helper.success({ ctx, res })
   }
 }
 

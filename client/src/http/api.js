@@ -12,8 +12,4 @@ export const tableExport = params => {
     responseType: 'blob'
   })
 }
-// export const queryUser = params => {
-//   return axios.get(resfulParamsToUrl(Path.userUrl1, params), {
-//     params
-//   })
-// }
+export const tableUpload = axios.defaults.baseURL + '/public/excel/792666.xlsx'
