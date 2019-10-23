@@ -49,7 +49,7 @@ class UploadController extends Controller {
   async tableExport() {
     const { ctx } = this
     const uuid = (Math.random() * 999999).toFixed()
-    //初始画excel
+    //初始化excel
     const workbook = new Excel.Workbook()
     let sheet = workbook.addWorksheet()
 

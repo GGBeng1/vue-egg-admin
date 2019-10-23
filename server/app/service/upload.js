@@ -9,14 +9,13 @@ class UplaodService extends Service {
       stream.on('error', reject)
       stream.on('data', chunk => {
         let workbook = XLSX.read(chunk, { type: 'buffer' })
-        // 遍历每张工作表进行读取（这里默认只读取第一张表）
         for (let sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
             // 利用 sheet_to_json 方法将 excel 转成 json 数据
             exceldata = exceldata.concat(
               XLSX.utils.sheet_to_json(workbook.Sheets[sheet])
             )
-            break // 如果只取第一张表，就取消注释这行
+            break // 只取第一张表
           }
         }
       })
