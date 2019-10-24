@@ -1,5 +1,6 @@
 module.exports = app => {
   const mongoose = app.mongoose
+  const time = new Date().getTime()
   const UserSchema = new mongoose.Schema(
     {
       password: { type: String, required: true },
@@ -8,7 +9,7 @@ module.exports = app => {
       nickname: { type: String, required: true },
       avatarUrl: { type: String },
       extra: { type: mongoose.Schema.Types.Mixed },
-      createdAt: { type: Date, default: Date.now }
+      createdAt: { type: Date, default: time }
     },
     { versionKey: false }
   )
