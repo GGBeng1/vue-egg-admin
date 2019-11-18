@@ -32,6 +32,10 @@ export default {
     async init() {
       let res = await getHomeList();
       // console.log(res);
+      let { code, data } = res.data;
+      if (code == 200) {
+        this.$store.commit("setUserInfo", data);
+      }
     }
   },
   mounted() {
