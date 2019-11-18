@@ -39,7 +39,11 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="用户昵称">
-          <el-input v-model="form.nickname" :disabled="lock.nickname">
+          <el-input
+            v-model="userInfo.nickname"
+            :disabled="lock.nickname"
+            :maxlength="15"
+          >
             <!-- <el-button slot="append" icon="el-icon-edit"></el-button>
              -->
             <i
@@ -52,7 +56,7 @@
         </el-form-item>
         <el-form-item v-if="!lock.nickname">
           <el-button type="primary" @click="handlerSubmit">保存</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="handleClose">取消</el-button>
         </el-form-item>
       </el-form>
     </el-drawer>
@@ -62,6 +66,7 @@
 <script>
 import { mapState } from "vuex";
 import axios from "@/http/axios";
+import { updateUserNickname } from "@/http/api.js";
 export default {
   props: {
     open: {
@@ -78,7 +83,8 @@ export default {
       serverUrl: axios.defaults.baseURL + "/api/upload",
       headers: {},
       process: false,
-      percent: 0
+      percent: 0,
+      userInfo: {}
     };
   },
   computed: {
@@ -90,9 +96,24 @@ export default {
     handleClose() {
       this.$emit("update:open", false);
       this.lock.nickname = true;
+      this.handlerGetNickname();
     },
     handlerSubmit() {
-      console.log(123);
+      updateUserNickname({ nickname: this.userInfo.nickname }).then(res => {
+        let { code, data } = res.data;
+        if (code == "200") {
+          this.$message({
+            message: `昵称已更改为${data.nickname}`,
+            type: "success",
+            showClose: true
+          });
+          this.$store.commit("updateNickname", data.nickname);
+        }
+        // console.log(res);
+      });
+    },
+    handlerGetNickname() {
+      this.userInfo = Object.assign({}, this.form);
     },
     handlerEdit(lable) {
       this.lock[lable] = !this.lock[lable];
@@ -129,6 +150,9 @@ export default {
       this.process = false;
       this.$message.error("视频上传失败，请重新上传！");
     }
+  },
+  mounted() {
+    this.handlerGetNickname();
   }
 };
 </script>
