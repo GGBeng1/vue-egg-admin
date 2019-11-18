@@ -59,7 +59,8 @@ export default {
         }
       });
       this.menuList = arr;
-    }
+    },
+    handlerSelect() {}
   },
   created() {
     this.defaultActive = this.$route.path;
