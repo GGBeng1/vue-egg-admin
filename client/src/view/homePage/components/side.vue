@@ -37,34 +37,7 @@ export default {
   data() {
     return {
       defaultActive: "",
-      menuList: [
-        {
-          name: "Excel",
-          icon: "el-icon-s-order",
-          children: [
-            {
-              name: "导出Excel",
-              path: "/home/tableExport"
-            },
-            {
-              name: "上传Excel",
-              path: "/home/tableUpload"
-            }
-          ]
-        }, {
-          name: "图表",
-          icon: "el-icon-s-data",
-          children: [
-            {
-              name: "线",
-              path: "/home/lineChart"
-            }, {
-              name: "面",
-              path: "/home/areaChart"
-            }
-          ]
-        }
-      ]
+      menuList: []
     };
   },
   computed: {
@@ -74,36 +47,27 @@ export default {
     })
   },
   methods: {
-    handlerSelect(indexPath) {
-      window.localStorage.setItem("defaultActive", indexPath);
-      // console.log('indexPath', indexPath)
-      // console.log('tabsList', this.tabsList)
-      console.log('return', this.isActive(this.tabsList, indexPath))
-      this.$store.commit('tabsList', this.isActive(this.tabsList, indexPath))
-    },
-    // 判断tabsList里是否有当前所点击菜单
-    isActive(arr, path) {
-      let obj = {}
-      arr && arr.forEach((item, index) => {
-        console.log('arr', arr)
-        if (path !== item.path) {
-          obj = {
-            name: 'add',
-            closable: true,
-            type: 'info',
-            path: path
-          }
+    handlerAddMenuList(options, basePath) {
+      let arr = this._.cloneDeep(options);
+      arr.forEach(item => {
+        item.icon = item.meta.icon;
+        if (!item.children || item.children.length == 0) {
+          item.path = basePath + "/" + item.path;
+        } else if (item.children || item.children.length > 0) {
+          item.children.forEach(i => {
+            i.path = basePath + "/" + item.path + "/" + i.path;
+          });
         }
-      })
-      return obj
-    }
+      });
+      this.menuList = arr;
+    },
+    handlerSelect() {}
   },
   created() {
-    let res = window.localStorage.getItem("defaultActive");
-    if (res) {
-      this.defaultActive = res;
-      this.$router.push(res);
-    }
+    this.defaultActive = this.$route.path;
+    let arr = this.$router.options.routes[2].children;
+    let path = this.$router.options.routes[2].path;
+    this.handlerAddMenuList(arr, path);
   }
 };
 </script>

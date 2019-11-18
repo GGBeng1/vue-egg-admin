@@ -17,7 +17,7 @@
     </div>
     <div class="userInfo">
       <div style="margin-right:20px">
-        <el-avatar :src="baseUrl + userMsg.avatarUrl" :size="35"></el-avatar>
+        <el-avatar :src="avatarUrl" :size="35"></el-avatar>
       </div>
       <div>
         <el-dropdown trigger="click" size="small">
@@ -58,7 +58,10 @@ export default {
     ...mapState({
       userMsg: state => state.userMsg,
       isCollapse: state => state.isCollapse
-    })
+    }),
+    avatarUrl() {
+      return this.baseUrl + this.userMsg.avatarUrl;
+    }
   },
   methods: {
     ...mapMutations(["changeIsCollapse"]),
