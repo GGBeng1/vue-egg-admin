@@ -37,22 +37,7 @@ export default {
   data() {
     return {
       defaultActive: "",
-      menuList: [
-        {
-          name: "Excel",
-          icon: "el-icon-s-order",
-          children: [
-            {
-              name: "导出Excel",
-              path: "/home/tableExport"
-            },
-            {
-              name: "上传Excel",
-              path: "/home/tableUpload"
-            }
-          ]
-        }
-      ]
+      menuList: []
     };
   },
   computed: {
@@ -61,18 +46,27 @@ export default {
     })
   },
   methods: {
-    handlerSelect(indexPath) {
-      window.localStorage.setItem("defaultActive", indexPath);
+    handlerAddMenuList(options, basePath) {
+      let arr = this._.cloneDeep(options);
+      arr.forEach(item => {
+        item.icon = item.meta.icon;
+        if (!item.children || item.children.length == 0) {
+          item.path = basePath + "/" + item.path;
+        } else if (item.children || item.children.length > 0) {
+          item.children.forEach(i => {
+            i.path = basePath + "/" + item.path + "/" + i.path;
+          });
+        }
+      });
+      this.menuList = arr;
     }
   },
   created() {
-    let res = window.localStorage.getItem("defaultActive");
-    if (res) {
-      this.defaultActive = res;
-      this.$router.push(res);
-    }
-  },
-  watch: {}
+    this.defaultActive = this.$route.path;
+    let arr = this.$router.options.routes[2].children;
+    let path = this.$router.options.routes[2].path;
+    this.handlerAddMenuList(arr, path);
+  }
 };
 </script>
 

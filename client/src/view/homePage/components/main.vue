@@ -15,6 +15,7 @@ export default {
 <style lang="scss" scoped>
 .main {
   padding: 10px;
+  overflow: hidden;
 }
 .fade-transform-leave-active,
 .fade-transform-enter-active {
