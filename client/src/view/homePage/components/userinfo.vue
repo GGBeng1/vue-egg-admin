@@ -50,7 +50,7 @@
             ></i>
           </el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item v-if="!lock.nickname">
           <el-button type="primary" @click="handlerSubmit">保存</el-button>
           <el-button>取消</el-button>
         </el-form-item>
@@ -89,6 +89,7 @@ export default {
   methods: {
     handleClose() {
       this.$emit("update:open", false);
+      this.lock.nickname = true;
     },
     handlerSubmit() {
       console.log(123);
