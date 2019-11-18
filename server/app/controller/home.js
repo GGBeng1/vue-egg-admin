@@ -1,12 +1,21 @@
-'use strict'
+"use strict";
 
-const Controller = require('egg').Controller
+const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this
-    ctx.body = 'hi, egg'
+    const { ctx, service } = this;
+    const _id = ctx.state.user.data._id;
+    let userInfo = await service.user.findByUserId(_id);
+    let res = {
+      nickname: userInfo.nickname,
+      avatarUrl: userInfo.avatarUrl
+    };
+    ctx.helper.success({
+      ctx,
+      res
+    });
   }
 }
 
-module.exports = HomeController
+module.exports = HomeController;
