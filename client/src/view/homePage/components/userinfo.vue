@@ -97,6 +97,7 @@ export default {
       this.$emit("update:open", false);
       this.lock.nickname = true;
       this.handlerGetNickname();
+      this.userInfo = {};
     },
     handlerSubmit() {
       updateUserNickname({ nickname: this.userInfo.nickname }).then(res => {
@@ -109,7 +110,6 @@ export default {
           });
           this.$store.commit("updateNickname", data.nickname);
         }
-        // console.log(res);
       });
     },
     handlerGetNickname() {
@@ -119,7 +119,6 @@ export default {
       this.lock[lable] = !this.lock[lable];
     },
     handleAvatarSuccess(file, res) {
-      // console.log(res);
       if (res && res.response.code == 200) {
         this.$store.commit("setUserAvatarUrl", res.response.data.avatarUrl);
       }
@@ -148,11 +147,18 @@ export default {
     },
     handerErrorUpload(event) {
       this.process = false;
-      this.$message.error("视频上传失败，请重新上传！");
+      this.$message.error("头像上传失败，请重新上传！");
     }
   },
   mounted() {
-    this.handlerGetNickname();
+    // this.handlerGetNickname();
+  },
+  watch: {
+    open(val) {
+      if (val) {
+        this.handlerGetNickname();
+      }
+    }
   }
 };
 </script>
