@@ -51,18 +51,51 @@ export default {
               path: "/home/tableUpload"
             }
           ]
+        }, {
+          name: "图表",
+          icon: "el-icon-s-data",
+          children: [
+            {
+              name: "线",
+              path: "/home/lineChart"
+            }, {
+              name: "面",
+              path: "/home/areaChart"
+            }
+          ]
         }
       ]
     };
   },
   computed: {
     ...mapState({
-      isCollapse: state => state.isCollapse
+      isCollapse: state => state.isCollapse,
+      tabsList: state => state.tabsList
     })
   },
   methods: {
     handlerSelect(indexPath) {
       window.localStorage.setItem("defaultActive", indexPath);
+      // console.log('indexPath', indexPath)
+      // console.log('tabsList', this.tabsList)
+      console.log('return', this.isActive(this.tabsList, indexPath))
+      this.$store.commit('tabsList', this.isActive(this.tabsList, indexPath))
+    },
+    // 判断tabsList里是否有当前所点击菜单
+    isActive(arr, path) {
+      let obj = {}
+      arr && arr.forEach((item, index) => {
+        console.log('arr', arr)
+        if (path !== item.path) {
+          obj = {
+            name: 'add',
+            closable: true,
+            type: 'info',
+            path: path
+          }
+        }
+      })
+      return obj
     }
   },
   created() {
@@ -71,8 +104,7 @@ export default {
       this.defaultActive = res;
       this.$router.push(res);
     }
-  },
-  watch: {}
+  }
 };
 </script>
 
