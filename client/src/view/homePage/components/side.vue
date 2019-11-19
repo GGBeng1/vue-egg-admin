@@ -67,6 +67,7 @@ export default {
     this.defaultActive = this.$route.path;
     let arr = this.$router.options.routes[2].children;
     let path = this.$router.options.routes[2].path;
+    console.log("$roouter", this.$router.options);
     this.handlerAddMenuList(arr, path);
   }
 };

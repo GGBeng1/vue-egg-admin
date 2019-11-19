@@ -3,7 +3,9 @@ import Router from "vue-router";
 import Login from "@/view/Login/index";
 import NoPage from "@/view/404/404";
 import store from "../store/index";
-import { Message } from "element-ui";
+import {
+    Message
+} from "element-ui";
 
 Vue.use(Router);
 const originalPush = Router.prototype.push;
@@ -74,6 +76,34 @@ export default new Router({
                             )
                     }
                 ]
+            }, {
+                path: "chart",
+                name: "图表",
+                meta: {
+                    icon: "el-icon-s-data"
+                },
+                component: () =>
+                    import (
+                        /* webpackChunkName: "chart" */
+                        "@/view/homePage/components/main"
+                    ),
+                children: [{
+                    path: "lineChart",
+                    name: "lineChart",
+                    component: () =>
+                        import (
+                            /* webpackChunkName: "lineChart" */
+                            "@/view/chart/lineChart"
+                        )
+                }, {
+                    path: "areaChart",
+                    name: "areaChart",
+                    component: () =>
+                        import (
+                            /* webpackChunkName: "areaChart" */
+                            "@/view/chart/areaChart"
+                        )
+                }]
             }]
         }
     ]
