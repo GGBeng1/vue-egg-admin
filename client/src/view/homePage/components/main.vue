@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <topBar></topBar>
     <transition name="fade-transform" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -8,12 +7,8 @@
 </template>
 
 <script>
-import topBar from './topBar.vue'
 export default {
-  name: "mainView",
-  components: {
-    topBar
-  }
+  name: "mainView"
 };
 </script>
 
