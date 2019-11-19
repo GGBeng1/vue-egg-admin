@@ -61,13 +61,35 @@ export default {
       });
       this.menuList = arr;
     },
-    handlerSelect() {}
+    handlerSelect(path, index, v) {
+      let namesList = this.getNamesList(this.tabsList);
+      if (!namesList.includes(v.$el.innerText)) {
+        this.$store.commit("tabsList", [
+          {
+            name: v.$el.innerText,
+            closable: true,
+            type: "success",
+            path: path
+          }
+        ]);
+      } else {
+        this.$store.commit("changeColor", v.$el.innerText);
+      }
+    },
+    // 拿name进行对比
+    getNamesList(arr) {
+      let result = [];
+      arr.forEach((item, index) => {
+        item.type = "info";
+        result.push(item.name);
+      });
+      return result;
+    }
   },
   created() {
     this.defaultActive = this.$route.path;
     let arr = this.$router.options.routes[2].children;
     let path = this.$router.options.routes[2].path;
-    console.log("$roouter", this.$router.options);
     this.handlerAddMenuList(arr, path);
   }
 };

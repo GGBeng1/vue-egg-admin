@@ -19,5 +19,15 @@ export default {
     },
     changeIsCollapse(state) {
         state.isCollapse = !state.isCollapse;
+    },
+    tabsList(state, arr) {
+        state.tabsList = state.tabsList.concat(arr)
+    },
+    changeColor(state, name) {
+        state.tabsList.forEach((item, index) => {
+            if (item.name === name) {
+                item.type = 'success'
+            }
+        })
     }
 };

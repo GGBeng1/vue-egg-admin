@@ -48,7 +48,7 @@ export default new Router({
                 import ( /* webpackChunkName: "home" */ "@/view/homePage/index"),
             children: [{
                 path: "table",
-                name: "table",
+                name: "表格",
                 meta: {
                     icon: "el-icon-s-order"
                 },
@@ -59,7 +59,7 @@ export default new Router({
                     ),
                 children: [{
                         path: "tableExport",
-                        name: "tableExport",
+                        name: "导出",
                         component: () =>
                             import (
                                 /* webpackChunkName: "tableExport" */
@@ -68,7 +68,7 @@ export default new Router({
                     },
                     {
                         path: "tableUpload",
-                        name: "tableUpload",
+                        name: "上传",
                         component: () =>
                             import (
                                 /* webpackChunkName: "tableUpload" */
@@ -89,7 +89,7 @@ export default new Router({
                     ),
                 children: [{
                     path: "lineChart",
-                    name: "lineChart",
+                    name: "线性图表",
                     component: () =>
                         import (
                             /* webpackChunkName: "lineChart" */
@@ -97,7 +97,7 @@ export default new Router({
                         )
                 }, {
                     path: "areaChart",
-                    name: "areaChart",
+                    name: "面积图表",
                     component: () =>
                         import (
                             /* webpackChunkName: "areaChart" */
