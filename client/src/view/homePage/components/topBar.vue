@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
   data() {
-    return {}
+    return {};
   },
   computed: {
     ...mapState({
@@ -29,13 +29,14 @@ export default {
   mounted() {
     // console.log('tabsList', this.$store.state.tabsList)
   }
-}
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .top-bar {
+  padding: 8px 10px;
   width: 100%;
-  height: 40px;
+  border-bottom: 1px solid #eee;
   .tabs-list {
     height: 100%;
     li {

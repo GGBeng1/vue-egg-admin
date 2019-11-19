@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="home-main">
     <transition name="fade-transform" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
+.home-main {
   padding: 10px;
   overflow: hidden;
 }
