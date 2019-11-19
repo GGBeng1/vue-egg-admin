@@ -55,7 +55,6 @@ export default {
 <style lang="scss" scoped>
 .top-bar {
   padding: 8px 10px;
-  width: 100%;
   border-bottom: 1px solid #eee;
   .el-tag {
     margin-right: 5px;
