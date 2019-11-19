@@ -16,8 +16,11 @@
       ></i>
     </div>
     <div class="userInfo">
-      <div style="margin-right:20px">
-        <el-avatar :src="avatarUrl" :size="35" fit="cover"></el-avatar>
+      <div style="margin-right:20px;height:35px;width:35px;">
+        <img
+          :src="avatarUrl"
+          style="width:100%;height:100%;border-radius: 50%;object-fit: cover;"
+        />
       </div>
       <div>
         <el-dropdown trigger="click" size="small">
@@ -60,7 +63,12 @@ export default {
       isCollapse: state => state.isCollapse
     }),
     avatarUrl() {
-      return this.baseUrl + this.userMsg.avatarUrl;
+      // console.log(this.userMsg.avatarUrl);
+      if (this.userMsg.avatarUrl) {
+        return this.baseUrl + this.userMsg.avatarUrl;
+      } else {
+        return "";
+      }
     }
   },
   methods: {

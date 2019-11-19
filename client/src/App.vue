@@ -6,13 +6,7 @@
 
 <script>
 export default {
-  name: "App",
-  created() {
-    let info = JSON.parse(localStorage.getItem("userMsg"));
-    if (info) {
-      this.$store.commit("setUserMsg", info);
-    }
-  }
+  name: "App"
 };
 </script>
 

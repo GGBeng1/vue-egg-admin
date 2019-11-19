@@ -1,10 +1,16 @@
 export default {
-    userMsg: {},
-    isCollapse: false,
-    tabsList: [{
-        name: '首页',
-        closable: false,
-        type: 'info',
-        path: '/home'
-    }]
-}
+  userMsg: {
+    token: "",
+    nickname: "",
+    avatarUrl: ""
+  },
+  isCollapse: false,
+  tabsList: [
+    {
+      name: "首页",
+      closable: false,
+      type: "info",
+      path: "/home"
+    }
+  ]
+};

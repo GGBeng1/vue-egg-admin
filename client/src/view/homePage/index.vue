@@ -36,10 +36,17 @@ export default {
   methods: {
     async init() {
       let res = await getHomeList();
-      // console.log(res);
+      let { data, code } = res.data;
+      if (code == 200) {
+        this.$store.commit("setUserInfo", data);
+        let token = JSON.parse(window.localStorage.getItem("token"));
+        if (token) {
+          this.$store.commit("setUserToken", token);
+        }
+      }
     }
   },
-  mounted() {
+  created() {
     this.init();
   }
 };

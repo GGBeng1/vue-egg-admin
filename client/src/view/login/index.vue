@@ -62,27 +62,26 @@ export default {
     onSubmit() {
       this.$refs.form.validate(async valid => {
         if (valid) {
-          let res = await login(this.form);
-          let { state, userMsg, msg } = res.data.data;
-          if (state) {
-            window.localStorage.setItem("userMsg", JSON.stringify(userMsg));
-            this.$store.commit("setUserMsg", userMsg);
-            this.$router.push("/home");
-          } else {
-            this.$message({
-              message: msg,
-              type: "warning",
-              showClose: true
-            });
-          }
+          login(this.form).then(res => {
+            let { state, token, msg } = res.data.data;
+            if (state) {
+              this.$store.commit("setUserToken", token);
+              this.$router.push("/home");
+            } else {
+              this.$message({
+                message: msg,
+                type: "warning",
+                showClose: true
+              });
+            }
+          });
         } else {
-          // console.log('error submit!!');
           return false;
         }
       });
     }
   },
-  mounted() {
+  created() {
     let token = this.$store.state.userMsg.token;
     if (token) {
       this.$router.push("/home");
