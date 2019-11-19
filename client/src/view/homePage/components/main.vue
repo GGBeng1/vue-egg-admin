@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="home-main">
     <transition name="fade-transform" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -7,17 +7,13 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import topBar from "./topBar.vue";
-=======
->>>>>>> 957af349fa0677b07cb5448e7cc35f25d5f9e547
 export default {
   name: "mainView"
 };
 </script>
 
 <style lang="scss" scoped>
-.main {
+.home-main {
   padding: 10px;
   overflow: hidden;
 }

@@ -4,7 +4,7 @@
     <div class="layout">
       <homeSide class="homeSide"></homeSide>
       <div class="main">
-        <topBar class="topBar"></topBar>
+        <topBar></topBar>
         <homeMain class="homeMain"></homeMain>
       </div>
     </div>
@@ -16,8 +16,8 @@
 import homeHeader from "./components/header";
 import homeMain from "./components/main";
 import homeSide from "./components/side";
-import topBar from "./components/topBar";
 import userInfo from "./components/userinfo";
+import topBar from "./components/topBar";
 import { getHomeList } from "@/http/api.js";
 export default {
   components: {
@@ -37,10 +37,6 @@ export default {
     async init() {
       let res = await getHomeList();
       // console.log(res);
-      let { code, data } = res.data;
-      if (code == 200) {
-        this.$store.commit("setUserInfo", data);
-      }
     }
   },
   mounted() {
@@ -56,15 +52,10 @@ export default {
     height: calc(100% - 50px);
     display: flex;
     .main {
-      height: 100%;
+      width: 100%;
+    }
+    .homeMain {
       flex: 1;
-      .tabBar {
-        height: 40px;
-      }
-      .homeMain {
-        box-sizing: border-box;
-        height: calc(100% - 40px);
-      }
     }
   }
 }
