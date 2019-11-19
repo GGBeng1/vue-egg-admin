@@ -3,7 +3,10 @@
     <homeHeader :open.sync="open"></homeHeader>
     <div class="layout">
       <homeSide class="homeSide"></homeSide>
-      <homeMain class="homeMain"></homeMain>
+      <div class="main">
+        <topBar class="topBar"></topBar>
+        <homeMain class="homeMain"></homeMain>
+      </div>
     </div>
     <userInfo :open.sync="open"></userInfo>
   </div>
@@ -13,6 +16,7 @@
 import homeHeader from "./components/header";
 import homeMain from "./components/main";
 import homeSide from "./components/side";
+import topBar from "./components/topBar";
 import userInfo from "./components/userinfo";
 import { getHomeList } from "@/http/api.js";
 export default {
@@ -20,7 +24,8 @@ export default {
     homeHeader,
     homeMain,
     homeSide,
-    userInfo
+    userInfo,
+    topBar
   },
   data() {
     return {
@@ -50,8 +55,16 @@ export default {
   .layout {
     height: calc(100% - 50px);
     display: flex;
-    .homeMain {
+    .main {
+      height: 100%;
       flex: 1;
+      .tabBar {
+        height: 40px;
+      }
+      .homeMain {
+        box-sizing: border-box;
+        height: calc(100% - 40px);
+      }
     }
   }
 }

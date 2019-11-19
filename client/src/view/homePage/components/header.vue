@@ -17,7 +17,7 @@
     </div>
     <div class="userInfo">
       <div style="margin-right:20px">
-        <el-avatar :src="avatarUrl" :size="35"></el-avatar>
+        <el-avatar :src="avatarUrl" :size="35" fit="cover"></el-avatar>
       </div>
       <div>
         <el-dropdown trigger="click" size="small">
@@ -106,5 +106,8 @@ export default {
 <style lang='scss'>
 .el-popper[x-placement^="bottom"] {
   margin-top: 16px;
+}
+.el-avatar > img {
+  width: 100%;
 }
 </style>
