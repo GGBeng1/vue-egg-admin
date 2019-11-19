@@ -7,7 +7,20 @@ export default {
     state.userMsg.avatarUrl = url;
   },
   clearUserMsg(state) {
-    state.userMsg = {};
+    state.userMsg = {
+      token: "",
+      nickname: "",
+      avatarUrl: ""
+    };
+    state.tabsList = [
+      {
+        name: "首页",
+        closable: false,
+        type: "info",
+        path: "/home"
+      }
+    ];
+    state.defaultActive = "";
   },
   updateNickname(state, nickname) {
     state.userMsg.nickname = nickname;
