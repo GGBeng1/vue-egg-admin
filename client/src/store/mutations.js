@@ -25,9 +25,12 @@ export default {
     },
     changeColor(state, name) {
         state.tabsList.forEach((item, index) => {
-            if (item.name === name) {
+            if (item.name.trim() == name.trim()) {
                 item.type = 'success'
             }
         })
+    },
+    defaultActive(state, path) {
+        state.defaultActive = path
     }
 };

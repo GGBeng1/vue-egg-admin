@@ -6,5 +6,6 @@ export default {
         closable: false,
         type: 'info',
         path: '/home'
-    }]
+    }],
+    defaultActive: ''
 }

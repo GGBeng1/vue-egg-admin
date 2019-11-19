@@ -36,14 +36,14 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      defaultActive: "",
       menuList: []
     };
   },
   computed: {
     ...mapState({
       isCollapse: state => state.isCollapse,
-      tabsList: state => state.tabsList
+      tabsList: state => state.tabsList,
+      defaultActive: state => state.defaultActive
     })
   },
   methods: {
@@ -87,7 +87,8 @@ export default {
     }
   },
   created() {
-    this.defaultActive = this.$route.path;
+    // this.defaultActive = this.$route.path;
+    this.$store.commit("defaultActive", this.$route.path);
     let arr = this.$router.options.routes[2].children;
     let path = this.$router.options.routes[2].path;
     this.handlerAddMenuList(arr, path);
