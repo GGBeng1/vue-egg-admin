@@ -12,5 +12,6 @@ export default {
       type: "info",
       path: "/home"
     }
-  ]
+  ],
+  defaultActive: ""
 };

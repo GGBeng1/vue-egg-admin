@@ -9,6 +9,8 @@
       :closable="item.closable"
       :type="item.type"
       effect="plain"
+      @click="toggleTab"
+      @close="closeTab"
     >
       {{ item.name }}
     </el-tag>
@@ -23,11 +25,29 @@ export default {
   },
   computed: {
     ...mapState({
-      tabsList: state => state.tabsList
+      tabsList: state => state.tabsList,
+      defaultActive: state => state.defaultActive
     })
   },
-  mounted() {
-    // console.log('tabsList', this.$store.state.tabsList)
+  mounted() {},
+  methods: {
+    toggleTab(e) {
+      this.tabsList.forEach((item, index) => {
+        // 让所有标签样式的重置
+        item.type = "info";
+        if (item.name.trim() === e.target.innerText.trim()) {
+          // 跳转到当前点击的路由页面
+          this.$router.push(item.path);
+        }
+      });
+      // 关联菜单栏的被激活状态
+      this.$store.commit("defaultActive", this.$route.path);
+      // 设置当前点击标签样式
+      this.$store.commit("changeColor", e.target.innerText);
+    },
+    closeTab(e) {
+      console.log("close", e.target);
+    }
   }
 };
 </script>
@@ -37,6 +57,10 @@ export default {
   padding: 8px 10px;
   width: 100%;
   border-bottom: 1px solid #eee;
+  .el-tag {
+    margin-right: 5px;
+    cursor: pointer;
+  }
   .tabs-list {
     height: 100%;
     li {

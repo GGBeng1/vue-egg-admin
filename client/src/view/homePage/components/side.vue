@@ -36,14 +36,14 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      defaultActive: "",
       menuList: []
     };
   },
   computed: {
     ...mapState({
       isCollapse: state => state.isCollapse,
-      tabsList: state => state.tabsList
+      tabsList: state => state.tabsList,
+      defaultActive: state => state.defaultActive
     })
   },
   methods: {
@@ -61,13 +61,36 @@ export default {
       });
       this.menuList = arr;
     },
-    handlerSelect() {}
+    handlerSelect(path, index, v) {
+      let namesList = this.getNamesList(this.tabsList);
+      if (!namesList.includes(v.$el.innerText)) {
+        this.$store.commit("tabsList", [
+          {
+            name: v.$el.innerText,
+            closable: true,
+            type: "success",
+            path: path
+          }
+        ]);
+      } else {
+        this.$store.commit("changeColor", v.$el.innerText);
+      }
+    },
+    // 拿name进行对比
+    getNamesList(arr) {
+      let result = [];
+      arr.forEach((item, index) => {
+        item.type = "info";
+        result.push(item.name);
+      });
+      return result;
+    }
   },
   created() {
-    this.defaultActive = this.$route.path;
+    // this.defaultActive = this.$route.path;
+    this.$store.commit("defaultActive", this.$route.path);
     let arr = this.$router.options.routes[2].children;
     let path = this.$router.options.routes[2].path;
-    console.log("$roouter", this.$router.options);
     this.handlerAddMenuList(arr, path);
   }
 };
