@@ -38,10 +38,10 @@ export default {
         if (item.name.trim() === e.target.innerText.trim()) {
           // 跳转到当前点击的路由页面
           this.$router.push(item.path);
+          // 关联菜单栏的被激活状态
+          this.$store.commit("defaultActive", item.path);
         }
       });
-      // 关联菜单栏的被激活状态
-      this.$store.commit("defaultActive", this.$route.path);
       // 设置当前点击标签样式
       this.$store.commit("changeColor", e.target.innerText);
     },

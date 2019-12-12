@@ -8,8 +8,8 @@ axios.defaults.timeout = 0;
 if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = "http://localhost:7001";
 } else {
-  axios.defaults.baseURL = "http://10.1.58.71:7001";
-  // axios.defaults.baseURL = 'http://localhost:7001'
+  // axios.defaults.baseURL = "http://10.1.58.71:7001";
+  axios.defaults.baseURL = "http://localhost:7001";
 }
 /**
  * axios请求拦截器
