@@ -17,15 +17,12 @@
     </div>
     <div class="userInfo">
       <div style="margin-right:20px;height:35px;width:35px;">
-        <img
-          :src="avatarUrl"
-          style="width:100%;height:100%;border-radius: 50%;object-fit: cover;"
-        />
+        <el-avatar :src="avatarUrl" style="width:100%;height:100%;"></el-avatar>
       </div>
       <div>
         <el-dropdown trigger="click" size="small">
           <span style="color: #fff;cursor: pointer;">
-            {{ userMsg.nickname
+            {{ userMsg.nickname || "加载中..."
             }}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
