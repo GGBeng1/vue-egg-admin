@@ -1,6 +1,6 @@
 /* eslint valid-jsdoc: "off" */
 
-'use strict'
+"use strict"
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -13,14 +13,14 @@ module.exports = appInfo => {
   const config = (exports = {})
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1571107417264_279'
+  config.keys = appInfo.name + "_1571107417264_279"
 
   // add your middleware config here
   config.middleware = []
   config.multipart = {
-    fileSize: '50mb',
-    mode: 'stream',
-    fileExtensions: ['.xls', '.xlsx']
+    fileSize: "50mb",
+    mode: "stream",
+    fileExtensions: [".xls", ".xlsx"]
   }
   // config.swaggerdoc = {
   //   dirScanner: './app/controller',
@@ -44,11 +44,19 @@ module.exports = appInfo => {
     }
   }
   config.cors = {
-    origin: '*',
-    allowMethods: 'GET,HEAD,PUT,OPTIONS,POST,DELETE,PATCH'
+    origin: "http://127.0.0.1:8080",
+    credentials: true,
+    allowMethods: "GET,HEAD,PUT,OPTIONS,POST,DELETE,PATCH"
   }
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true
+    }
+  }
+
   config.mongoose = {
-    url: 'mongodb://localhost:27017/123',
+    url: "mongodb://localhost:27017/123",
     // url: 'mongodb://127.0.0.1:27017/123',
     options: {
       // useMongoClient: true,
@@ -61,7 +69,7 @@ module.exports = appInfo => {
     }
   }
   config.jwt = {
-    secret: 'Great4-M',
+    secret: "Great4-M",
     enable: true, // default is false
     match: /^\/api/ // optional
   }

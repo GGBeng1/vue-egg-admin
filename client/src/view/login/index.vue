@@ -17,6 +17,18 @@
               <i slot="prepend" class="el-icon-lock"></i>
             </el-input>
           </el-form-item>
+          <el-form-item prop="verify">
+            <!-- <el-input v-model="form.password" clearable show-password>
+              <i slot="prepend" class="el-icon-lock"></i>
+            </el-input> -->
+            <el-input
+              v-model="form.verify"
+              placeholder="请输入验证码"
+              clearable=""
+              style="width:150px;"
+            ></el-input>
+            <div v-html="imgSrc" class="verify" @click="getVerify()"></div>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit" round style="width:100%"
               >登录</el-button
@@ -29,7 +41,7 @@
 </template>
 
 <script>
-import { login } from "@/http/api.js";
+import { login, getVerify } from "@/http/api.js";
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -47,24 +59,37 @@ export default {
     return {
       form: {
         username: "",
-        password: ""
+        password: "",
+        verify: ""
       },
+      imgSrc: "",
       rules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ],
+        verify: [{ required: true, message: "请输入验证码", trigger: "blur" }],
         password: [{ validator: validatePass, trigger: "blur" }]
       }
     };
   },
   methods: {
+    getVerify() {
+      getVerify().then(data => {
+        this.imgSrc = data.data;
+      });
+    },
     onSubmit() {
       this.$refs.form.validate(async valid => {
         if (valid) {
           login(this.form).then(res => {
             let { state, token, msg } = res.data.data;
             if (state) {
+              this.$message({
+                message: "登录成功",
+                type: "success",
+                showClose: true
+              });
               this.$store.commit("setUserToken", token);
               this.$router.push("/home");
             } else {
@@ -86,6 +111,7 @@ export default {
     if (token) {
       this.$router.push("/home");
     }
+    this.getVerify();
   }
 };
 </script>
@@ -99,6 +125,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .verify {
+    display: inline-block;
+    height: 40px;
+    position: absolute;
+    margin-left: 10px;
   }
 }
 </style>

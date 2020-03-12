@@ -61,7 +61,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
-    open: config.dev.autoOpenBrowser,
+    open: "http://127.0.0.1:8080",
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
@@ -115,9 +115,7 @@ module.exports = new Promise((resolve, reject) => {
             messages: [
               `Your application is running here: 
               ${chalk.cyan("http://" + ip + ":" + port)}
-              ${chalk.cyan(
-                "http://" + devWebpackConfig.devServer.host + ":" + port
-              )}
+              ${chalk.cyan("http://127.0.0.1:" + port)}
               `
             ]
           },

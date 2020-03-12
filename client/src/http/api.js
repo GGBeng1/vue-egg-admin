@@ -19,3 +19,8 @@ export const tableExport = params => {
   });
 };
 export const tableUpload = axios.defaults.baseURL + "/public/excel/792666.xlsx";
+export const getVerify = params => {
+  return axios.get(resfulParamsToUrl("/verify", params), {
+    params
+  });
+};

@@ -1,6 +1,6 @@
-'use strict'
+"use strict"
 
-const Controller = require('egg').Controller
+const Controller = require("egg").Controller
 
 class LoginController extends Controller {
   async index() {
@@ -8,11 +8,15 @@ class LoginController extends Controller {
     //参数类型
     let obj = {
       username: {
-        type: 'string',
+        type: "string",
         required: true
       },
       password: {
-        type: 'string',
+        type: "string",
+        required: true
+      },
+      verify: {
+        type: "string",
         required: true
       }
     }
@@ -25,6 +29,12 @@ class LoginController extends Controller {
       ctx,
       res
     })
+  }
+  async getVerify() {
+    const { ctx, service } = this
+    let captcha = await service.login.captcha()
+    // ctx.response.type = "image/svg+xml"
+    ctx.body = captcha.data
   }
 }
 
