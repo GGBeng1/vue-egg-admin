@@ -85,13 +85,13 @@ export default {
           login(this.form).then(res => {
             let { state, token, msg } = res.data.data;
             if (state) {
+              this.$store.commit("setUserToken", token);
+              this.$router.push("/home");
               this.$message({
                 message: "登录成功",
                 type: "success",
                 showClose: true
               });
-              this.$store.commit("setUserToken", token);
-              this.$router.push("/home");
             } else {
               this.$message({
                 message: msg,
