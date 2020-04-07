@@ -61,7 +61,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
-    open: "http://127.0.0.1:8080",
+    open: "http://127.0.0.1:3000",
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,

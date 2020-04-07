@@ -5,7 +5,7 @@
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
-module.exports = appInfo => {
+module.exports = (appInfo) => {
   /**
    * built-in config
    * @type {Egg.EggAppConfig}
@@ -20,7 +20,7 @@ module.exports = appInfo => {
   config.multipart = {
     fileSize: "50mb",
     mode: "stream",
-    fileExtensions: [".xls", ".xlsx"]
+    fileExtensions: [".xls", ".xlsx"],
   }
   // config.swaggerdoc = {
   //   dirScanner: './app/controller',
@@ -40,19 +40,19 @@ module.exports = appInfo => {
 
   config.security = {
     csrf: {
-      enable: false
-    }
+      enable: false,
+    },
   }
   config.cors = {
-    origin: "http://127.0.0.1:8080",
+    origin: "http://127.0.0.1:3000",
     credentials: true,
-    allowMethods: "GET,HEAD,PUT,OPTIONS,POST,DELETE,PATCH"
+    allowMethods: "GET,HEAD,PUT,OPTIONS,POST,DELETE,PATCH",
   }
   config.security = {
     csrf: {
       enable: false,
-      ignoreJSON: true
-    }
+      ignoreJSON: true,
+    },
   }
 
   config.mongoose = {
@@ -65,13 +65,13 @@ module.exports = appInfo => {
       reconnectTries: Number.MAX_VALUE,
       bufferMaxEntries: 0,
       useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
+      useUnifiedTopology: true,
+    },
   }
   config.jwt = {
     secret: "Great4-M",
     enable: true, // default is false
-    match: /^\/api/ // optional
+    match: /^\/api/, // optional
   }
 
   // add your user config here
@@ -80,6 +80,6 @@ module.exports = appInfo => {
   }
   return {
     ...config,
-    ...userConfig
+    ...userConfig,
   }
 }

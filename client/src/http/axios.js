@@ -10,14 +10,14 @@ if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = "http://127.0.0.1:7001";
 } else {
   // axios.defaults.baseURL = "http://10.1.58.71:7001";
-  axios.defaults.baseURL = "http://localhost:7001";
+  axios.defaults.baseURL = "http://127.0.0.1:7001";
 }
 
 //取消重复请求
 let pending = []; //声明一个数组用于存储每个请求的取消函数和axios标识
 let cancelToken = axios.CancelToken;
 let removePending = config => {
-  console.log("pending", pending);
+  // console.log("pending", pending);
   for (let p in pending) {
     if (pending[p].u === config.url.split("?")[0] + "&" + config.method) {
       //当当前请求在数组中存在时执行函数体

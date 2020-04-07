@@ -98,6 +98,7 @@ export default {
                 type: "warning",
                 showClose: true
               });
+              this.getVerify();
             }
           });
         } else {

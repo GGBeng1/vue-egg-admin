@@ -35,9 +35,16 @@ export default {
   tabsList(state, arr) {
     state.tabsList = state.tabsList.concat(arr);
   },
-  changeColor(state, name) {
+  cloleTab(state, path) {
+    state.tabsList.forEach((i, index) => {
+      if (i.path == path) {
+        state.tabsList.splice(index, 1);
+      }
+    });
+  },
+  changeColor(state, path) {
     state.tabsList.forEach((item, index) => {
-      if (item.name.trim() == name.trim()) {
+      if (item.path == path) {
         item.type = "success";
       }
     });

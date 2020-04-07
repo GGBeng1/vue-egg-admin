@@ -73,7 +73,7 @@ export default {
           }
         ]);
       } else {
-        this.$store.commit("changeColor", v.$el.innerText);
+        this.$store.commit("changeColor", path);
       }
     },
     // 拿name进行对比
