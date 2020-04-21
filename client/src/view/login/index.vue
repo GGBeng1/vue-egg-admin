@@ -26,6 +26,7 @@
               placeholder="请输入验证码"
               clearable=""
               style="width:150px;"
+              @keyup.enter.native="onSubmit"
             ></el-input>
             <div v-html="imgSrc" class="verify" @click="getVerify()"></div>
           </el-form-item>

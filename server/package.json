@@ -13,10 +13,12 @@
     "egg-cors": "^2.2.3",
     "egg-jwt": "^3.1.6",
     "egg-mongoose": "^3.2.0",
+    "egg-redis": "^2.4.0",
     "egg-scripts": "^2.11.0",
     "egg-swagger-doc-feat": "^2.2.13",
     "egg-validate": "^2.0.2",
     "exceljs": "^3.2.0",
+    "redlock": "^4.1.0",
     "stream-wormhole": "^1.1.0",
     "svg-captcha": "^1.4.0",
     "xlsx": "^0.15.1"

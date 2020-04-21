@@ -7,6 +7,7 @@ const path = require("path");
 const os = require("os");
 const chalk = require("chalk");
 const baseWebpackConfig = require("./webpack.base.conf");
+const OpenBrowserPlugin = require("open-browser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
@@ -57,11 +58,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ]
     },
     hot: true,
+    hotOnly: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
-    open: "http://127.0.0.1:3000",
+    // open: "127.0.0.1:3000",
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
@@ -73,6 +75,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    new OpenBrowserPlugin({ url: `http://127.0.0.1:${config.dev.port}` }),
     new webpack.DefinePlugin({
       "process.env": require("../config/dev.env")
     }),

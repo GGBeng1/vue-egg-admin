@@ -1,56 +1,65 @@
-"use strict";
+"use strict"
 
-const Controller = require("egg").Controller;
-
+const Controller = require("egg").Controller
+// import redLock from "../common/redLock"
+const Redlock = require("redlock")
 class UserController extends Controller {
   async createUser() {
-    let { ctx, service } = this;
+    let { ctx, service } = this
     let obj = {
       username: {
         type: "string",
-        required: true
+        required: true,
       },
       password: {
         type: "string",
-        required: true
+        required: true,
       },
       nickname: {
         type: "string",
-        required: true
-      }
-    };
+        required: true,
+      },
+    }
     //是否符合传参类型
-    ctx.validate(obj);
+    ctx.validate(obj)
     //用户登录信息
-    const userInfo = ctx.request.body || {};
-    let res = await service.user.userCreate(userInfo);
+    const userInfo = ctx.request.body || {}
+    let res = await service.user.userCreate(userInfo)
     ctx.helper.success({
       ctx,
-      res
-    });
+      res,
+    })
   }
   //更新用户昵称
   async updateUserNickname() {
-    let { ctx, service } = this;
+    let { ctx, service, app } = this
+    const uuid = (Math.random() * 999999).toFixed()
+    // console.log(app.redis)
+    const redlock = new Redlock([app.redis], {
+      retryDelay: 200, // time in ms
+      retryCount: 5,
+    })
     let obj = {
       nickname: {
         type: "string",
-        required: true
-      }
-    };
-    ctx.validate(obj);
-    const req = ctx.request.body || {};
-    const _id = ctx.state.user.data._id;
+        required: true,
+      },
+    }
+    ctx.validate(obj)
+    const req = ctx.request.body || {}
+    const _id = ctx.state.user.data._id
+    let lock = await redlock.lock(_id, uuid, 2000)
     let rest = await service.user.findByIdAndUpdate(_id, {
-      nickname: req.nickname
-    });
-    let res = {};
-    res.nickname = rest.nickname;
+      nickname: req.nickname,
+    })
+    let res = {}
+    res.nickname = rest.nickname
     ctx.helper.success({
       ctx,
-      res
-    });
+      res,
+    })
+    lock.unlock()
   }
 }
 
-module.exports = UserController;
+module.exports = UserController
