@@ -75,7 +75,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
-    new OpenBrowserPlugin({ url: `http://127.0.0.1:${config.dev.port}` }),
     new webpack.DefinePlugin({
       "process.env": require("../config/dev.env")
     }),
@@ -113,6 +112,9 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
         new serverQRcode(),
+        new OpenBrowserPlugin({
+          url: `http://127.0.0.1:${port}`
+        }),
         new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
             messages: [
