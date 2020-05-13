@@ -1,4 +1,4 @@
-# vue+egg Spa-admin
+# vue+egg-admin
 
 ## 安装
 
