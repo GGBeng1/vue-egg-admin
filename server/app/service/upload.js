@@ -7,7 +7,7 @@ class UplaodService extends Service {
     return new Promise((resolve, reject) => {
       let exceldata = []
       stream.on('error', reject)
-      stream.on('data', chunk => {
+      stream.on('data', (chunk) => {
         let workbook = XLSX.read(chunk, { type: 'buffer' })
         for (let sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
@@ -20,7 +20,7 @@ class UplaodService extends Service {
         }
       })
       stream.on('end', () => {
-        let result = exceldata.map(o => {
+        let result = exceldata.map((o) => {
           return { name: o['名称'], date: o['日期'], address: o['地址'] }
         })
         resolve(result)

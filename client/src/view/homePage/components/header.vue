@@ -71,11 +71,11 @@ export default {
   methods: {
     ...mapMutations(["changeIsCollapse"]),
     handlerLoginOut() {
-      window.localStorage.clear();
       this.$store.commit("clearUserMsg");
       this.$router.replace({
         path: "/"
       });
+      window.localStorage.clear();
     },
     handlerRejectUserInfo() {
       this.$emit("update:open", true);
@@ -108,7 +108,7 @@ export default {
   }
 }
 </style>
-<style lang='scss'>
+<style lang="scss">
 .el-popper[x-placement^="bottom"] {
   margin-top: 16px;
 }

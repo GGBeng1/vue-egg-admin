@@ -10,7 +10,7 @@ export default {
       name: "首页",
       closable: false,
       type: "info",
-      path: "/home"
+      path: "/home/welcome"
     }
   ],
   defaultActive: ""

@@ -11,22 +11,20 @@
       router
       @select="handlerSelect"
     >
-      <el-submenu
-        :index="index + ''"
-        v-for="(item, index) in menuList"
-        :key="index + 'zz'"
-      >
-        <template slot="title">
-          <i :class="item.icon"></i>
-          <span slot="title">{{ item.name }}</span>
-        </template>
-        <el-menu-item
-          :index="ele.path"
-          v-for="(ele, i) in item.children"
-          :key="index + '-' + i"
-          >{{ ele.name }}</el-menu-item
-        >
-      </el-submenu>
+      <template v-for="(item, index) in menuList">
+        <el-submenu :index="index + ''" :key="index + 'zz'" v-if="!item.hide">
+          <template slot="title">
+            <i :class="item.icon"></i>
+            <span slot="title">{{ item.name }}</span>
+          </template>
+          <el-menu-item
+            :index="ele.path"
+            v-for="(ele, i) in item.children"
+            :key="index + '-' + i"
+            >{{ ele.name }}</el-menu-item
+          >
+        </el-submenu>
+      </template>
     </el-menu>
   </div>
 </template>
@@ -88,7 +86,8 @@ export default {
   },
   created() {
     // this.defaultActive = this.$route.path;
-    this.$store.commit("defaultActive", this.$route.path);
+    this.$store.commit("defaultActive", "/home/welcome");
+    this.$store.commit("changeColor", "/home/welcome");
     let arr = this.$router.options.routes[2].children;
     let path = this.$router.options.routes[2].path;
     this.handlerAddMenuList(arr, path);

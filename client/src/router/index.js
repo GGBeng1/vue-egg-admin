@@ -47,6 +47,19 @@ export default new Router({
         import(/* webpackChunkName: "home" */ "@/view/homePage/index"),
       children: [
         {
+          path: "welcome",
+          name: "welcome",
+          meta: {
+            icon: ""
+          },
+          hide: true,
+          component: () =>
+            import(
+              /* webpackChunkName: "welcome" */
+              "@/view/welcome/index"
+            )
+        },
+        {
           path: "table",
           name: "表格",
           meta: {
@@ -74,6 +87,15 @@ export default new Router({
                 import(
                   /* webpackChunkName: "tableUpload" */
                   "@/view/table/tableUpload"
+                )
+            },
+            {
+              path: "fileUpload",
+              name: "文件分片上传",
+              component: () =>
+                import(
+                  /* webpackChunkName: "fileUpload" */
+                  "@/view/table/fileUpload"
                 )
             }
           ]

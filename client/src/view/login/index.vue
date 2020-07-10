@@ -87,7 +87,7 @@ export default {
             let { state, token, msg } = res.data.data;
             if (state) {
               this.$store.commit("setUserToken", token);
-              this.$router.push("/home");
+              this.$router.push("/home/welcome");
               this.$message({
                 message: "登录成功",
                 type: "success",
@@ -111,7 +111,7 @@ export default {
   created() {
     let token = this.$store.state.userMsg.token;
     if (token) {
-      this.$router.push("/home");
+      this.$router.push("/home/welcome");
     }
     this.getVerify();
   }
