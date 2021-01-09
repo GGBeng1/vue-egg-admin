@@ -27,28 +27,28 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      action: "",
+      action: '',
       fileList: []
-    };
+    }
   },
   methods: {
-    handlerPreview(info) {
-      console.log(info);
+    handlerPreview (info) {
+      console.log(info)
     },
-    handlerRemove(info, fileList) {},
-    hanlerSubmitUpload() {
-      this.$refs.upload.submit();
+    handlerRemove (info, fileList) {},
+    hanlerSubmitUpload () {
+      this.$refs.upload.submit()
     },
-    handlerBeforeAvatarUpload(file) {
-      const isLt5M = file.size / 1024 / 1024 < 5;
+    handlerBeforeAvatarUpload (file) {
+      const isLt5M = file.size / 1024 / 1024 < 5
       if (!isLt5M) {
-        //大于5m分片
+        // 大于5m分片
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

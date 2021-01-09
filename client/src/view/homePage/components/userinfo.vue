@@ -49,7 +49,7 @@
             <i
               slot="suffix"
               class="el-icon-edit"
-              style="cursor: pointer;"
+              style="cursor: pointer"
               @click="handlerEdit('nickname')"
             ></i>
           </el-input>
@@ -64,9 +64,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import axios from "@/http/axios";
-import { updateUserNickname } from "@/http/api.js";
+import { mapState } from 'vuex'
+import axios from '@/http/axios'
+import { updateUserNickname } from '@/http/api.js'
 export default {
   props: {
     open: {
@@ -74,18 +74,18 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       lock: {
         nickname: true
       },
       baseUrl: axios.defaults.baseURL,
-      serverUrl: axios.defaults.baseURL + "/api/upload",
+      serverUrl: axios.defaults.baseURL + '/api/upload',
       headers: {},
       process: false,
       percent: 0,
       userInfo: {}
-    };
+    }
   },
   computed: {
     ...mapState({
@@ -93,74 +93,74 @@ export default {
     })
   },
   methods: {
-    handleClose() {
-      this.$emit("update:open", false);
-      this.lock.nickname = true;
-      this.handlerGetNickname();
-      this.userInfo = {};
+    handleClose () {
+      this.$emit('update:open', false)
+      this.lock.nickname = true
+      this.handlerGetNickname()
+      this.userInfo = {}
     },
-    handlerSubmit() {
+    handlerSubmit () {
       updateUserNickname({ nickname: this.userInfo.nickname }).then(res => {
-        let { code, data } = res.data;
-        if (code == "200") {
+        const { code, data } = res.data
+        if (code == '200') {
           this.$message({
             message: `昵称已更改为${data.nickname}`,
-            type: "success",
+            type: 'success',
             showClose: true
-          });
-          this.$store.commit("updateNickname", data.nickname);
+          })
+          this.$store.commit('updateNickname', data.nickname)
         }
-      });
+      })
     },
-    handlerGetNickname() {
-      this.userInfo = Object.assign({}, this.form);
+    handlerGetNickname () {
+      this.userInfo = Object.assign({}, this.form)
     },
-    handlerEdit(lable) {
-      this.lock[lable] = !this.lock[lable];
+    handlerEdit (lable) {
+      this.lock[lable] = !this.lock[lable]
     },
-    handleAvatarSuccess(file, res) {
+    handleAvatarSuccess (file, res) {
       if (res && res.response.code == 200) {
-        this.$store.commit("setUserAvatarUrl", res.response.data.avatarUrl);
+        this.$store.commit('setUserAvatarUrl', res.response.data.avatarUrl)
       }
       setTimeout(() => {
-        this.process = false;
-      }, 500);
+        this.process = false
+      }, 500)
     },
-    beforeAvatarUpload(file) {
-      const isLt2M = file.size / 1024 / 1024 < 2;
+    beforeAvatarUpload (file) {
+      const isLt2M = file.size / 1024 / 1024 < 2
       if (
-        ["image/jpeg", "image/gif", "image/png", "image/bmp"].indexOf(
+        ['image/jpeg', 'image/gif', 'image/png', 'image/bmp'].indexOf(
           file.type
         ) == -1
       ) {
-        this.$message.error("请上传正确的图片格式");
-        return false;
+        this.$message.error('请上传正确的图片格式')
+        return false
       }
       if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      this.headers["Authorization"] = `Bearer ${this.form.token}`;
+      this.headers.Authorization = `Bearer ${this.form.token}`
     },
-    uploadProcess(event, file, fileList) {
-      this.process = true;
-      this.percent = Math.floor(event.percent);
+    uploadProcess (event, file, fileList) {
+      this.process = true
+      this.percent = Math.floor(event.percent)
     },
-    handerErrorUpload(event) {
-      this.process = false;
-      this.$message.error("头像上传失败，请重新上传！");
+    handerErrorUpload (event) {
+      this.process = false
+      this.$message.error('头像上传失败，请重新上传！')
     }
   },
-  mounted() {
+  mounted () {
     // this.handlerGetNickname();
   },
   watch: {
-    open(val) {
+    open (val) {
       if (val) {
-        this.handlerGetNickname();
+        this.handlerGetNickname()
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

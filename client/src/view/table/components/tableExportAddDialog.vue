@@ -48,41 +48,41 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       form: {
-        name: "",
-        address: "",
-        date: ""
+        name: '',
+        address: '',
+        date: ''
       },
       rules: {
         name: [
-          { required: true, message: "请输入名称", trigger: "blur" },
-          { min: 1, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入名称', trigger: 'blur' },
+          { min: 1, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
-        date: [{ required: true, message: "请输入日期", trigger: "blur" }],
-        address: [{ required: true, message: "请输入地址", trigger: "blur" }]
+        date: [{ required: true, message: '请输入日期', trigger: 'blur' }],
+        address: [{ required: true, message: '请输入地址', trigger: 'blur' }]
       }
-    };
+    }
   },
   methods: {
-    beforeClose() {
-      this.$emit("update:open", false);
-      this.handlerResetForm();
+    beforeClose () {
+      this.$emit('update:open', false)
+      this.handlerResetForm()
     },
-    handlerSubmit() {
+    handlerSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.$emit("addMsg", this.form);
-          this.$emit("update:open", false);
+          this.$emit('addMsg', this.form)
+          this.$emit('update:open', false)
         }
-      });
+      })
     },
-    handlerResetForm(formName) {
-      this.$refs["form"].resetFields();
+    handlerResetForm (formName) {
+      this.$refs.form.resetFields()
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

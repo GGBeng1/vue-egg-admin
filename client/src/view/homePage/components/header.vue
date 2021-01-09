@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import axios from "@/http/axios";
+import { mapState, mapMutations } from 'vuex'
+import axios from '@/http/axios'
 export default {
   props: {
     open: {
@@ -49,39 +49,39 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       baseUrl: axios.defaults.baseURL
-    };
+    }
   },
   computed: {
     ...mapState({
       userMsg: state => state.userMsg,
       isCollapse: state => state.isCollapse
     }),
-    avatarUrl() {
+    avatarUrl () {
       // console.log(this.userMsg.avatarUrl);
       if (this.userMsg.avatarUrl) {
-        return this.baseUrl + this.userMsg.avatarUrl;
+        return this.baseUrl + this.userMsg.avatarUrl
       } else {
-        return "";
+        return ''
       }
     }
   },
   methods: {
-    ...mapMutations(["changeIsCollapse"]),
-    handlerLoginOut() {
-      this.$store.commit("clearUserMsg");
+    ...mapMutations(['changeIsCollapse']),
+    handlerLoginOut () {
+      this.$store.commit('clearUserMsg')
       this.$router.replace({
-        path: "/"
-      });
-      window.localStorage.clear();
+        path: '/'
+      })
+      window.localStorage.clear()
     },
-    handlerRejectUserInfo() {
-      this.$emit("update:open", true);
+    handlerRejectUserInfo () {
+      this.$emit('update:open', true)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

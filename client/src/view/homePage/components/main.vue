@@ -8,8 +8,8 @@
 
 <script>
 export default {
-  name: "mainView"
-};
+  name: 'mainView'
+}
 </script>
 
 <style lang="scss" scoped>

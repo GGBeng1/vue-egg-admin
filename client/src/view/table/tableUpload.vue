@@ -55,7 +55,7 @@ import uploadDialog from "./components/tableUploadDialog";
 import { tableUpload } from "@/http/api.js";
 export default {
   components: {
-    uploadDialog
+    uploadDialog,
   },
   data() {
     return {
@@ -64,19 +64,19 @@ export default {
       columns: [
         {
           prop: "name",
-          label: "名称"
+          label: "名称",
         },
         {
           prop: "date",
           label: "日期",
-          sortable: true
+          sortable: true,
         },
         {
           prop: "address",
-          label: "地址"
-        }
+          label: "地址",
+        },
       ],
-      selectOption: []
+      selectOption: [],
     };
   },
   methods: {
@@ -94,8 +94,8 @@ export default {
     },
     handlerDeleteRow(index) {
       this.tableData.splice(index, 1);
-    }
-  }
+    },
+  },
 };
 </script>
 

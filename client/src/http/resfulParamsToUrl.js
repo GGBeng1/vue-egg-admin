@@ -1,4 +1,4 @@
-export default function resfulParamsToUrl(url, params) {
+export default function resfulParamsToUrl (url, params) {
   if (!/{*}/g.test(url)) {
     return url
   } else if (
@@ -10,9 +10,9 @@ export default function resfulParamsToUrl(url, params) {
     )
     return url.slice(0, url.indexOf('{'))
   } else {
-    let { keys } = Object
-    for (let key of keys(params)) {
-      let reg = new RegExp('{' + key + '}', 'g')
+    const { keys } = Object
+    for (const key of keys(params)) {
+      const reg = new RegExp('{' + key + '}', 'g')
       if (reg.test(url)) {
         url = url.replace(reg, encodeURIComponent(params[key]))
         delete params[key]

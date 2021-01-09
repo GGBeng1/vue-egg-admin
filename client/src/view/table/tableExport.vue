@@ -55,99 +55,99 @@
 </template>
 
 <script>
-import { tableExport } from "@/http/api.js";
-import addDialog from "./components/tableExportAddDialog";
+import { tableExport } from '@/http/api.js'
+import addDialog from './components/tableExportAddDialog'
 export default {
   components: {
     addDialog
   },
-  data() {
+  data () {
     return {
       open: false,
       tableData: [
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         },
         {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
         },
         {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
         },
         {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
         },
         {
-          date: "2016-05-05",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          date: '2016-05-05',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
         }
       ],
       columns: [
         {
-          prop: "name",
-          label: "名称"
+          prop: 'name',
+          label: '名称'
         },
         {
-          prop: "date",
-          label: "日期",
+          prop: 'date',
+          label: '日期',
           sortable: true
         },
         {
-          prop: "address",
-          label: "地址"
+          prop: 'address',
+          label: '地址'
         }
       ],
       selectOption: []
-    };
+    }
   },
   methods: {
-    handlerSelectionChange(val) {
-      this.selectOption = val;
+    handlerSelectionChange (val) {
+      this.selectOption = val
     },
-    handerAdd() {
-      this.open = true;
+    handerAdd () {
+      this.open = true
     },
-    async handerExport() {
+    async handerExport () {
       if (this.selectOption.length == 0) {
         this.$message({
-          message: "请选择导出内容",
-          type: "warning",
+          message: '请选择导出内容',
+          type: 'warning',
           showClose: true
-        });
-        return;
+        })
+        return
       }
-      let res = await tableExport({ selectOption: this.selectOption });
-      const fileName = res.headers["content-disposition"].split("=")[1];
+      const res = await tableExport({ selectOption: this.selectOption })
+      const fileName = res.headers['content-disposition'].split('=')[1]
       const blob = new Blob([res.data], {
-        type: "application/vnd.ms-excel"
-      }); //处理文档流
-      const elink = document.createElement("a");
-      elink.download = fileName;
-      elink.style.display = "none";
-      elink.href = URL.createObjectURL(blob);
-      document.body.appendChild(elink);
-      elink.click();
-      URL.revokeObjectURL(elink.href); // 释放URL 对象
-      document.body.removeChild(elink);
+        type: 'application/vnd.ms-excel'
+      }) // 处理文档流
+      const elink = document.createElement('a')
+      elink.download = fileName
+      elink.style.display = 'none'
+      elink.href = URL.createObjectURL(blob)
+      document.body.appendChild(elink)
+      elink.click()
+      URL.revokeObjectURL(elink.href) // 释放URL 对象
+      document.body.removeChild(elink)
     },
-    handlerAddMsg(val) {
-      this.tableData.push(Object.assign({}, val));
-      this.$refs.addDialog.handlerResetForm();
+    handlerAddMsg (val) {
+      this.tableData.push(Object.assign({}, val))
+      this.$refs.addDialog.handlerResetForm()
     },
-    handlerDeleteRow(index) {
-      this.tableData.splice(index, 1);
+    handlerDeleteRow (index) {
+      this.tableData.splice(index, 1)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

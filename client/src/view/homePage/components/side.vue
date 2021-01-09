@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
       menuList: []
-    };
+    }
   },
   computed: {
     ...mapState({
@@ -45,54 +45,54 @@ export default {
     })
   },
   methods: {
-    handlerAddMenuList(options, basePath) {
-      let arr = this._.cloneDeep(options);
+    handlerAddMenuList (options, basePath) {
+      const arr = this._.cloneDeep(options)
       arr.forEach(item => {
-        item.icon = item.meta.icon;
+        item.icon = item.meta.icon
         if (!item.children || item.children.length == 0) {
-          item.path = basePath + "/" + item.path;
+          item.path = basePath + '/' + item.path
         } else if (item.children || item.children.length > 0) {
           item.children.forEach(i => {
-            i.path = basePath + "/" + item.path + "/" + i.path;
-          });
+            i.path = basePath + '/' + item.path + '/' + i.path
+          })
         }
-      });
-      this.menuList = arr;
+      })
+      this.menuList = arr
     },
-    handlerSelect(path, index, v) {
-      let namesList = this.getNamesList(this.tabsList);
+    handlerSelect (path, index, v) {
+      const namesList = this.getNamesList(this.tabsList)
       if (!namesList.includes(v.$el.innerText)) {
-        this.$store.commit("tabsList", [
+        this.$store.commit('tabsList', [
           {
             name: v.$el.innerText,
             closable: true,
-            type: "success",
+            type: 'success',
             path: path
           }
-        ]);
+        ])
       } else {
-        this.$store.commit("changeColor", path);
+        this.$store.commit('changeColor', path)
       }
     },
     // 拿name进行对比
-    getNamesList(arr) {
-      let result = [];
+    getNamesList (arr) {
+      const result = []
       arr.forEach((item, index) => {
-        item.type = "info";
-        result.push(item.name);
-      });
-      return result;
+        item.type = 'info'
+        result.push(item.name)
+      })
+      return result
     }
   },
-  created() {
+  created () {
     // this.defaultActive = this.$route.path;
-    this.$store.commit("defaultActive", "/home/welcome");
-    this.$store.commit("changeColor", "/home/welcome");
-    let arr = this.$router.options.routes[2].children;
-    let path = this.$router.options.routes[2].path;
-    this.handlerAddMenuList(arr, path);
+    this.$store.commit('defaultActive', '/home/welcome')
+    this.$store.commit('changeColor', '/home/welcome')
+    const arr = this.$router.options.routes[2].children
+    const path = this.$router.options.routes[2].path
+    this.handlerAddMenuList(arr, path)
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

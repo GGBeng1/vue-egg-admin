@@ -38,41 +38,41 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
-      action: "http://localhost:7001/api/tableUpload",
+      action: 'http://localhost:7001/api/tableUpload',
       headers: {
         Authorization: `Bearer ${this.$store.state.userMsg.token}`
       }
-    };
+    }
   },
   methods: {
-    beforeClose() {
-      this.$emit("update:open", false);
+    beforeClose () {
+      this.$emit('update:open', false)
     },
-    beforeAvatarUpload(file) {
+    beforeAvatarUpload (file) {
       const xlsx =
         file.type ==
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-      const size = file.size / 1024 / 1024 < 2;
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      const size = file.size / 1024 / 1024 < 2
 
       if (!xlsx) {
-        this.$message.error("上传的模板只能为xlsx格式!");
+        this.$message.error('上传的模板只能为xlsx格式!')
       }
       if (!size) {
-        this.$message.error("上传的文件不能大于2m");
+        this.$message.error('上传的文件不能大于2m')
       }
-      return xlsx && size;
+      return xlsx && size
     },
-    handlerSuccess(res) {
-      this.$emit("success", res.data);
-      this.$emit("update:open", false);
+    handlerSuccess (res) {
+      this.$emit('success', res.data)
+      this.$emit('update:open', false)
     },
-    handlerError(err) {
-      console.log(err);
+    handlerError (err) {
+      console.log(err)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

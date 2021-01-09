@@ -9,11 +9,11 @@
 <script type="text/ecmascript-6">
 export default {
   methods: {
-    handlerGohome() {
-      this.$router.push("/home");
+    handlerGohome () {
+      this.$router.push('/home')
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .page-404 {

@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import homeHeader from "./components/header";
-import homeMain from "./components/main";
-import homeSide from "./components/side";
-import userInfo from "./components/userinfo";
-import topBar from "./components/topBar";
-import { getHomeList } from "@/http/api.js";
+import homeHeader from './components/header'
+import homeMain from './components/main'
+import homeSide from './components/side'
+import userInfo from './components/userinfo'
+import topBar from './components/topBar'
+import { getHomeList } from '@/http/api.js'
 export default {
   components: {
     homeHeader,
@@ -27,29 +27,29 @@ export default {
     userInfo,
     topBar
   },
-  data() {
+  data () {
     return {
-      //是否显示用户信息
+      // 是否显示用户信息
       open: false
-    };
+    }
   },
   methods: {
-    async init() {
-      let res = await getHomeList();
-      let { data, code } = res.data;
+    async init () {
+      const res = await getHomeList()
+      const { data, code } = res.data
       if (code == 200) {
-        this.$store.commit("setUserInfo", data);
-        let token = JSON.parse(window.localStorage.getItem("token"));
+        this.$store.commit('setUserInfo', data)
+        const token = JSON.parse(window.localStorage.getItem('token'))
         if (token) {
-          this.$store.commit("setUserToken", token);
+          this.$store.commit('setUserToken', token)
         }
       }
     }
   },
-  created() {
-    this.init();
+  created () {
+    this.init()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

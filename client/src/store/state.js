@@ -1,17 +1,17 @@
 export default {
   userMsg: {
-    token: "",
-    nickname: "",
-    avatarUrl: ""
+    token: '',
+    nickname: '',
+    avatarUrl: ''
   },
   isCollapse: false,
   tabsList: [
     {
-      name: "首页",
+      name: '首页',
       closable: false,
-      type: "info",
-      path: "/home/welcome"
+      type: 'info',
+      path: '/home/welcome'
     }
   ],
-  defaultActive: ""
-};
+  defaultActive: ''
+}

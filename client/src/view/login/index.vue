@@ -42,80 +42,80 @@
 </template>
 
 <script>
-import { login, getVerify } from "@/http/api.js";
+import { login, getVerify } from '@/http/api.js'
 export default {
-  data() {
+  data () {
     var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
+      if (value === '') {
+        callback(new Error('请输入密码'))
       } else {
-        let ref = /^(?![a-z]+$)(?![A-Z]+$)(?![0-9]+$)[0-9a-zA-Z\W]\S{7,20}$/;
+        const ref = /^(?![a-z]+$)(?![A-Z]+$)(?![0-9]+$)[0-9a-zA-Z\W]\S{7,20}$/
         if (ref.test(value)) {
-          callback();
+          callback()
         } else {
-          callback(new Error("密码长度不小于八位包含大小写,数字,不少于两种"));
+          callback(new Error('密码长度不小于八位包含大小写,数字,不少于两种'))
         }
       }
-    };
+    }
     return {
       form: {
-        username: "",
-        password: "",
-        verify: ""
+        username: '',
+        password: '',
+        verify: ''
       },
-      imgSrc: "",
+      imgSrc: '',
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
         ],
-        verify: [{ required: true, message: "请输入验证码", trigger: "blur" }],
-        password: [{ validator: validatePass, trigger: "blur" }]
+        verify: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+        password: [{ validator: validatePass, trigger: 'blur' }]
       }
-    };
+    }
   },
   methods: {
-    getVerify() {
+    getVerify () {
       getVerify().then(data => {
-        this.imgSrc = data.data;
-      });
+        this.imgSrc = data.data
+      })
     },
-    onSubmit() {
+    onSubmit () {
       this.$refs.form.validate(async valid => {
         if (valid) {
           login(this.form).then(res => {
-            let { state, token, msg } = res.data.data;
+            const { state, token, msg } = res.data.data
             if (state) {
-              this.$store.commit("setUserToken", token);
-              this.$router.push("/home/welcome");
+              this.$store.commit('setUserToken', token)
+              this.$router.push('/home/welcome')
               this.$message({
-                message: "登录成功",
-                type: "success",
+                message: '登录成功',
+                type: 'success',
                 showClose: true
-              });
+              })
             } else {
               this.$message({
                 message: msg,
-                type: "warning",
+                type: 'warning',
                 showClose: true
-              });
-              this.getVerify();
+              })
+              this.getVerify()
             }
-          });
+          })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     }
   },
-  created() {
-    let token = this.$store.state.userMsg.token;
+  created () {
+    const token = this.$store.state.userMsg.token
     if (token) {
-      this.$router.push("/home/welcome");
+      this.$router.push('/home/welcome')
     }
-    this.getVerify();
+    this.getVerify()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

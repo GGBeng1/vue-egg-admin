@@ -1,55 +1,55 @@
 export default {
-  setUserToken(state, token) {
-    state.userMsg.token = token;
-    window.localStorage.setItem("token", JSON.stringify(token));
+  setUserToken (state, token) {
+    state.userMsg.token = token
+    window.localStorage.setItem('token', JSON.stringify(token))
   },
-  setUserAvatarUrl(state, url) {
-    state.userMsg.avatarUrl = url;
+  setUserAvatarUrl (state, url) {
+    state.userMsg.avatarUrl = url
   },
-  clearUserMsg(state) {
+  clearUserMsg (state) {
     state.userMsg = {
-      token: "",
-      nickname: "",
-      avatarUrl: ""
-    };
+      token: '',
+      nickname: '',
+      avatarUrl: ''
+    }
     state.tabsList = [
       {
-        name: "首页",
+        name: '首页',
         closable: false,
-        type: "info",
-        path: "/home/welcome"
+        type: 'info',
+        path: '/home/welcome'
       }
-    ];
-    state.defaultActive = "";
+    ]
+    state.defaultActive = ''
   },
-  updateNickname(state, nickname) {
-    state.userMsg.nickname = nickname;
+  updateNickname (state, nickname) {
+    state.userMsg.nickname = nickname
   },
-  setUserInfo(state, data) {
-    state.userMsg.nickname = data.nickname;
-    state.userMsg.avatarUrl = data.avatarUrl;
+  setUserInfo (state, data) {
+    state.userMsg.nickname = data.nickname
+    state.userMsg.avatarUrl = data.avatarUrl
   },
-  changeIsCollapse(state) {
-    state.isCollapse = !state.isCollapse;
+  changeIsCollapse (state) {
+    state.isCollapse = !state.isCollapse
   },
-  tabsList(state, arr) {
-    state.tabsList = state.tabsList.concat(arr);
+  tabsList (state, arr) {
+    state.tabsList = state.tabsList.concat(arr)
   },
-  cloleTab(state, path) {
+  cloleTab (state, path) {
     state.tabsList.forEach((i, index) => {
       if (i.path == path) {
-        state.tabsList.splice(index, 1);
+        state.tabsList.splice(index, 1)
       }
-    });
+    })
   },
-  changeColor(state, path) {
+  changeColor (state, path) {
     state.tabsList.forEach((item, index) => {
       if (item.path == path) {
-        item.type = "success";
+        item.type = 'success'
       }
-    });
+    })
   },
-  defaultActive(state, path) {
-    state.defaultActive = path;
+  defaultActive (state, path) {
+    state.defaultActive = path
   }
-};
+}

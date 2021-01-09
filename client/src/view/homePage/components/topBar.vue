@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {};
+  data () {
+    return {}
   },
   computed: {
     ...mapState({
@@ -29,33 +29,33 @@ export default {
       defaultActive: state => state.defaultActive
     })
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    toggleTab(ele, e) {
+    toggleTab (ele, e) {
       this.tabsList.forEach((item, index) => {
         // 让所有标签样式的重置
-        item.type = "info";
+        item.type = 'info'
         if (item.path == ele.path) {
           // 跳转到当前点击的路由页面
-          this.$router.push(item.path);
+          this.$router.push(item.path)
           // 关联菜单栏的被激活状态
-          this.$store.commit("defaultActive", ele.path);
+          this.$store.commit('defaultActive', ele.path)
         }
-      });
+      })
       // 设置当前点击标签样式
-      this.$store.commit("changeColor", ele.path);
+      this.$store.commit('changeColor', ele.path)
     },
-    closeTab(item, e) {
-      //cloleTab
+    closeTab (item, e) {
+      // cloleTab
       // console.log("close", item, e);
-      this.$store.commit("cloleTab", item.path);
-      let art = this.tabsList[this.tabsList.length - 1];
-      this.$store.commit("defaultActive", art.path);
-      this.$store.commit("changeColor", art.path);
-      this.$router.push(art.path);
+      this.$store.commit('cloleTab', item.path)
+      const art = this.tabsList[this.tabsList.length - 1]
+      this.$store.commit('defaultActive', art.path)
+      this.$store.commit('changeColor', art.path)
+      this.$router.push(art.path)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
