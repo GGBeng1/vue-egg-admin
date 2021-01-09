@@ -11,6 +11,7 @@ export default function resfulParamsToUrl (url, params) {
     return url.slice(0, url.indexOf('{'))
   } else {
     const { keys } = Object
+    // eslint-disable-next-line no-unused-vars
     for (const key of keys(params)) {
       const reg = new RegExp('{' + key + '}', 'g')
       if (reg.test(url)) {

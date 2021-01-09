@@ -18,6 +18,7 @@ const pending = [] // 声明一个数组用于存储每个请求的取消函数�
 const cancelToken = axios.CancelToken
 const removePending = config => {
   // console.log("pending", pending);
+  // eslint-disable-next-line no-unused-vars
   for (const p in pending) {
     if (pending[p].u === config.url.split('?')[0] + '&' + config.method) {
       // 当当前请求在数组中存在时执行函数体
@@ -35,6 +36,7 @@ const removePending = config => {
 axios.interceptors.request.use(
   config => {
     removePending(config) // 在一个axios发送前执行一下取消操作
+    // eslint-disable-next-line new-cap
     config.cancelToken = new cancelToken(c => {
       // pending存放每一次请求的标识，一般是url + 参数名 + 请求方法，当然你可以自己定义
       pending.push({ u: config.url.split('?')[0] + '&' + config.method, f: c }) // config.data为请求参数
