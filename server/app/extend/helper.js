@@ -1,13 +1,15 @@
-const moment = require('moment')
+'use strict';
+
+const moment = require('moment');
 
 // 处理成功响应
 exports.success = ({ ctx, res = {} }) => {
   ctx.body = {
     code: 200,
-    data: res
-  }
-  ctx.status = 200
-}
+    data: res,
+  };
+  ctx.status = 200;
+};
 
 // 格式化时间
-exports.formatTime = time => moment(time).format('YYYY-MM-DD HH:mm:ss')
+exports.formatTime = time => moment(time).format('YYYY-MM-DD HH:mm:ss');

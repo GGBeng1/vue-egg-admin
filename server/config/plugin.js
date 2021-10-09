@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 /** @type Egg.EggPlugin */
 module.exports = {
@@ -13,26 +13,26 @@ module.exports = {
 
   validate: {
     enable: true,
-    package: "egg-validate",
+    package: 'egg-validate',
   },
   mongoose: {
     enable: true,
-    package: "egg-mongoose",
+    package: 'egg-mongoose',
   },
   bcrypt: {
     enable: true,
-    package: "egg-bcrypt",
+    package: 'egg-bcrypt',
   },
   cors: {
     enable: true,
-    package: "egg-cors",
+    package: 'egg-cors',
   },
   jwt: {
     enable: true,
-    package: "egg-jwt",
+    package: 'egg-jwt',
   },
   redis: {
     enable: true,
-    package: "egg-redis",
+    package: 'egg-redis',
   },
-}
+};

@@ -1,19 +1,19 @@
-"use strict";
+'use strict';
 
-const Controller = require("egg").Controller;
+const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
     const { ctx, service } = this;
     const _id = ctx.state.user.data._id;
-    let userInfo = await service.user.findByUserId(_id);
-    let res = {
+    const userInfo = await service.user.findByUserId(_id);
+    const res = {
       nickname: userInfo.nickname,
-      avatarUrl: userInfo.avatarUrl
+      avatarUrl: userInfo.avatarUrl,
     };
     ctx.helper.success({
       ctx,
-      res
+      res,
     });
   }
 }
